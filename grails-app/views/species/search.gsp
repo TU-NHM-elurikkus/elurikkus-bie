@@ -210,16 +210,16 @@
                                         </label>
 
                                         <select id="per-page" name="per-page">
-                                            <option value="10" ${(params.rows == '10') ? "selected=\"selected\"" : ""}>
+                                            <option value="10"}>
                                                 10
                                             </option>
-                                            <option value="20" ${(params.rows == '20') ? "selected=\"selected\"" : ""}>
-                                                20
+                                            <option value="25" selected="selected">
+                                                25
                                             </option>
-                                            <option value="50" ${(params.rows == '50') ? "selected=\"selected\"" : ""}>
+                                            <option value="50">
                                                 50
                                             </option>
-                                            <option value="100" ${(params.rows == '100') ? "selected=\"selected\"" : ""} >
+                                            <option value="100">
                                                 100
                                             </option>
                                         </select>
@@ -232,16 +232,16 @@
 
                                         <select id="sort-by" name="sort-by">
                                             <option value="score" ${(params.sortField == 'score') ? "selected=\"selected\"" : ""}>
-                                                best match
+                                                Best match
                                             </option>
                                             <option value="scientificName" ${(params.sortField == 'scientificName') ? "selected=\"selected\"" : ""}>
-                                                scientific name
+                                                Scientific name
                                             </option>
                                             <option value="commonNameSingle" ${(params.sortField == 'commonNameSingle') ? "selected=\"selected\"" : ""}>
-                                                common name
+                                                Common name
                                             </option>
                                             <option value="rank" ${(params.sortField == 'rank') ? "selected=\"selected\"" : ""}>
-                                                taxon rank
+                                                Taxon rank
                                             </option>
                                         </select>
                                     </div>
@@ -253,10 +253,10 @@
 
                                         <select id="sort-order" name="sort-order">
                                             <option value="asc" ${(params.dir == 'asc') ? "selected=\"selected\"" : ""}>
-                                                ascending
+                                                Ascending
                                             </option>
                                             <option value="desc" ${(params.dir == 'desc' || !params.dir) ? "selected=\"selected\"" : ""}>
-                                                descending
+                                                Descending
                                             </option>
                                         </select>
                                     </div>
