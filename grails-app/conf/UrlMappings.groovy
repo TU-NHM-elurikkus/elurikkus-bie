@@ -2,7 +2,7 @@ class UrlMappings {
 
 	static mappings = {
         "/proxy/biocache-service/$path**" (controller: "proxy") {
-            action = [GET:'doGet']
+            action = [GET:"doGet"]
         }
 
         "/proxy/plutof/$path**" (controller: "plutof") {
@@ -15,7 +15,7 @@ class UrlMappings {
             }
         }
 
-        "/"(view:"/index")
-        "500"(view:'/error')
+        "/" (view: "/index")
+        "500" (view: "/error")
 	}
 }

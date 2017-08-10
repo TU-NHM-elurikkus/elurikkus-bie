@@ -1,25 +1,17 @@
 modules = {
-    bie {
-        dependsOn 'bootstrap', 'ekko'
-        resource url: [dir: 'js', file: 'atlas.js', plugin:'bie-plugin'], disposition: 'head', exclude: '*'
-        // TODO: Replace.
-        resource url: [dir: 'css', file: 'atlas.css'], attrs: [media: 'screen, print']
-    }
-
-    biefixed {
-        dependsOn 'bootstrap', 'ekko'
-        resource url: [dir: 'js', file: 'atlas.js', plugin:'bie-plugin'], disposition: 'head', exclude: '*'
-        // TODO: Replace.
-        resource url: [dir: 'css', file: 'atlas.css'], attrs: [media: 'screen, print']
-    }
-
     application {
         resource url: [dir: 'js', file: 'application.js', plugin:'bie-plugin']
     }
 
-    search {
+    searchOverride {
         resource url: [dir: 'js', file: 'jquery.sortElemets.js', plugin:'bie-plugin']
         resource url: [dir: 'js', file: 'search.js']
+        resource id: 'atlas', url: [dir: 'css', file: 'atlas.css']
+        resource "/css/atlas.css"
+    }
+
+    myatlas {
+        resource id: 'atlas', url: [dir: 'css', file: 'atlas.css']
     }
 
     showDependencies {

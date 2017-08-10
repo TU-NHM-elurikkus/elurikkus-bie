@@ -43,7 +43,6 @@ $(document).ready(function() {
     });
 
     // AJAX search results
-    injectBhlResults();
     injectBiocacheResults();
 
     // in mobile view toggle display of facets
@@ -178,12 +177,6 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function injectBhlResults() {
-    var bhlHtml = "<li><a href='http://www.biodiversitylibrary.org/search?SearchTerm=" + SEARCH_CONF.query + "&SearchCat=M#/names' target='bhl'>BHL Literature </a></li>"
-
-    insertSearchLinks(bhlHtml);
-}
-
 function injectBiocacheResults() {
     var queryToUse = (SEARCH_CONF.query == "" || SEARCH_CONF.query == "*" ? "*:*" : SEARCH_CONF.query);
     var url = SEARCH_CONF.biocacheServicesUrl + "/occurrences/search.json?q=" + queryToUse + "&start=0&pageSize=0&facet=off&qc=" + SEARCH_CONF.biocacheQueryContext;
@@ -194,7 +187,7 @@ function injectBiocacheResults() {
         success:  function(data) {
             var maxItems = parseInt(data.totalRecords, 10);
             var url = SEARCH_CONF.biocacheUrl + "/occurrences/search?q=" + queryToUse;
-            var html = "<li data-count=\"" + maxItems + "\"><a href=\"" + url + "\" id=\"biocacheSearchLink\">Occurrence records</a> (" + numberWithCommas(maxItems) + ")</li>";
+            var html = "<a href='" + url + "' class='page-header-links__link'>Occurrence records</a> (" + numberWithCommas(maxItems) + ")";
 
             insertSearchLinks(html);
         }
@@ -203,10 +196,5 @@ function injectBiocacheResults() {
 
 function insertSearchLinks(html) {
     // add content
-    $("#related-searches ul").append(html);
-    // sort by count
-    $('#related-searches ul li').sortElements(function(a, b){
-        return $(a).data("count") < $(b).data("count") ? 1 : -1;
-    });
-    $('#related-searches').removeClass('hide-node');
+    $("#related-searches").append(html);
 }
