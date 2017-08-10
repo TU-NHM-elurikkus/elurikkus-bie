@@ -16,7 +16,6 @@
 <%@ page import="au.org.ala.bie.BieTagLib" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
-<g:set var="alaUrl" value="${grailsApplication.config.ala.baseURL}" />
 <g:set var="biocacheUrl" value="${grailsApplication.config.biocache.baseURL}" />
 
 <!DOCTYPE html>
@@ -26,7 +25,9 @@
         <title>
             ${query} | Search
         </title>
-        <r:require modules="search" />
+
+        <r:require modules="searchOverride" />
+
         <r:script disposition='head'>
             // global var to pass GSP vars into JS file
             SEARCH_CONF = {
@@ -34,7 +35,7 @@
                 query: "${BieTagLib.escapeJS(query)}",
                 serverName: "${grailsApplication.config.grails.serverURL}",
                 bieUrl: "${grailsApplication.config.bie.baseURL}",
-                biocacheUrl: "${grailsApplication.config.biocache.baseURL}",
+                biocacheUrl: "${biocacheUrl}",
                 biocacheServicesUrl: "${grailsApplication.config.biocacheService.baseURL}",
                 bhlUrl: "${grailsApplication.config.bhl.baseURL}",
                 biocacheQueryContext: "${grailsApplication.config.biocacheService.queryContext}",
@@ -44,8 +45,8 @@
     </head>
 
     <body>
-        <div class="container-fluid">
-            <div class="page-header">
+        <div id="main-content">
+            <div id="listHeader", class="page-header">
                 <h1 class="page-header__title">
                     Search for Taxa
                 </h1>
@@ -55,37 +56,13 @@
                 </div>
 
                 <div class="page-header-links">
-                    <%-- TODO FIXME This does not work. See search.js --%>
-                    <div id="related-searches" class="related-searches hidden-node">
-                        <h4>
-                            Related Searches
-                        </h4>
-
-                        <ul class="list-unstyled"></ul>
+                    <div id="related-searches" class="related-searches">
                     </div>
                 </div>
             </div>
 
             <section class="search-section">
-                <form id="search-inpage" action="search" method="get" name="search-form">
-                    <div class="input-plus">
-                        <input
-                            id="search"
-                            type="text"
-                            name="q"
-                            value="${request.query == "*:*" ? '' : request.query}"
-                            placeholder="Search the Atlas"
-                            autocomplete="off"
-                            autofocus
-                            onfocus="this.value = this.value;"
-                            class="input-plus__field"
-                        />
-
-                        <button type="submit" class="erk-button erk-button--dark input-plus__addon">
-                            Serach
-                        </button>
-                    </div>
-                </form>
+                <g:render template="searchBox" />
 
                 <p>
                     Search for
@@ -97,7 +74,7 @@
                     returned
 
                     <strong>
-                        <g:formatNumber number="${searchResults.totalRecords}" type="number" />
+                        <g:formatNumber number="${searchResults.totalRecords}" />
                     </strong>
 
                     results
@@ -152,7 +129,7 @@
                                                         <a href="?${queryParam}${appendQueryParam}&fq=${facetResult.fieldName}:[* TO ${facetResult.fieldResult.opt(0)?.label}]">
                                                             Before ${firstYear}
                                                         </a>
-                                                        (<g:formatNumber number="${lastElement.count}" type="number" />)
+                                                        (<g:formatNumber number="${lastElement.count}" />)
                                                     </li>
                                                 </g:if>
 
@@ -177,7 +154,7 @@
                                                             <a href="?${queryParam}${appendQueryParam}&fq=${facetResult.fieldName}:[${fieldResult.label} TO ${dateRangeTo}]">
                                                                 ${startYear} - ${startYear + 10}
                                                             </a>
-                                                            (<g:formatNumber number="${fieldResult.count}" type="number" />)
+                                                            (<g:formatNumber number="${fieldResult.count}" />)
                                                         </li>
                                                     </g:if>
 
@@ -193,7 +170,7 @@
                                                             <a href="?${request.queryString}&fq=${facetResult.fieldName}:%22${fieldResult.label}%22">
                                                                 <g:message code="${facetResult.fieldName}.${fieldResult.label}" default="${fieldResult.label?:"[unknown]"}" />
                                                             </a>
-                                                            (<g:formatNumber number="${fieldResult.count}" type="number" />)
+                                                            (<g:formatNumber number="${fieldResult.count}" />)
                                                         </li>
                                                     </g:else>
                                                 </g:each>
@@ -499,11 +476,7 @@
                                             </h4>
                                         </g:else>
 
-                                        <g:if test="${result.has("highlight")}">
-                                            <p>
-                                                <bie:displaySearchHighlights highlight="${result.highlight}" />
-                                            </p>
-                                        </g:if>
+
 
                                         <g:if test="${result.has("idxtype") && result.idxtype == 'TAXON'}">
                                             <ul class="summary-actions list-inline">
@@ -527,7 +500,7 @@
                                                     <li>
                                                         <a href="${biocacheUrl}/occurrences/search?q=lsid:${result.guid}">
                                                             Occurrences:
-                                                            <g:formatNumber number="${result.occurrenceCount}" type="number" />
+                                                            <g:formatNumber number="${result.occurrenceCount}" />
                                                         </a>
                                                     </li>
                                                 </g:if>
@@ -582,7 +555,7 @@
 
                             if(searchResults.length > 0) {
                                 $results.find('.exploreYourAreaLink').html(searchResults[i].name);
-                                $results.find('.exploreYourAreaLink').attr('href', '${grailsApplication.config.biocache.baseURL}/explore/your-area#' +
+                                $results.find('.exploreYourAreaLink').attr('href', '${biocacheUrl}/explore/your-area#' +
                                         searchResults[0].latitude  +
                                         '|' +  searchResults[0].longitude +
                                         '|12|ALL_SPECIES'

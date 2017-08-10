@@ -254,9 +254,7 @@
                                             </h3>
                                         </div>
 
-                                        <div class="card-block">
-                                            <g:render template="onlineResources" plugin="bie-plugin" />
-                                        </div>
+                                        
                                     </div>
                                 </div>
 
@@ -1388,9 +1386,7 @@
                 mapEnvOptions: "${grailsApplication.config.map.env?.options?:'color:' + grailsApplication.config.map.records.colour+ ';name:circle;size:4;opacity:0.8'}"
             };
 
-            $(function(){
-                showSpeciesPage();
-            });
+
 
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 var target = $(e.target).attr("href");
