@@ -388,10 +388,10 @@ function addOverviewImages(imagesArray, hasPreferredImage) {
         addOverviewImage(imagesArray[0]);
     }
 
-    for(j = 1; j < 5; j++) {
+    for(var j = 1; j < 5; j++) {
         // load smaller thumb images
         if(imagesArray.length > j) {
-            addOverviewThumb(imagesArray[j], j)
+            addOverviewThumb(imagesArray[j], j);
         }
     }
 }
@@ -597,8 +597,8 @@ function loadBhl(start, rows, scroll) {
     if(taxonName) {
         var terms = taxonName.split(/\s+/).length;
         if(terms > 2) {
-            query += taxonName.split(/\s+/).join(" AND ");
-        } else if(terms == 2) {
+            query += taxonName.split(/\s+/).join(' AND ');
+        } else if(terms === 2) {
             query += '"' + taxonName + '"';
         } else {
             query += taxonName;
@@ -609,47 +609,50 @@ function loadBhl(start, rows, scroll) {
         synonyms = synonyms.replace(/\\\"/g,'"'); // remove escaped quotes
 
         if(taxonName) {
-            query += ' OR (' + synonyms + ")"
+            query += ' OR (' + synonyms + ')';
         } else {
-            query += synonyms
+            query += synonyms;
         }
     }
 
     if(!query) {
-        return cancelSearch("No names were found to search BHL");
+        return cancelSearch('No names were found to search BHL');
     }
 
-    var url = "http://bhlidx.ala.org.au/select?q=" + query + '&start=' + start + "&rows=" + rows +
-        "&wt=json&fl=name%2CpageId%2CitemId%2Cscore&hl=on&hl.fl=text&hl.fragsize=200&" +
-        "group=true&group.field=itemId&group.limit=7&group.ngroups=true&taxa=false";
+    var url = 'http://bhlidx.ala.org.au/select?q=' + query + '&start=' + start + '&rows=' + rows +
+        '&wt=json&fl=name%2CpageId%2CitemId%2Cscore&hl=on&hl.fl=text&hl.fragsize=200&' +
+        'group=true&group.field=itemId&group.limit=7&group.ngroups=true&taxa=false';
 
-    var buf = "";
-    $("#status-box").css("display", "block");
-    $("#synonyms").html("").css("display", "none")
-    $("#bhl-results-list").html("");
+    $('#status-box').css('display', 'block');
+    $('#synonyms').html('').css('display', 'none');
+    $('#bhl-results-list').html('');
 
     $.ajax({
         url: url,
         dataType: 'jsonp',
-        jsonp: "json.wrf",
-        success:  function(data) {
-            var itemNumber = parseInt(data.responseHeader.params.start, 10) + 1;
-            var maxItems = parseInt(data.grouped.itemId.ngroups, 10);
-            if(maxItems == 0) {
-                return cancelSearch("No references were found for <pre>" + query + "</pre>");
+        jsonp: 'json.wrf',
+        success: function(data) {
+            var itemNumber = parseInt(data.responseHeader.params.start) + 1;
+            var maxItems = parseInt(data.grouped.itemId.ngroups);
+            if(maxItems === 0) {
+                return cancelSearch('No references were found for <pre>' + query + '</pre>');
             }
-            var startItem = parseInt(start, 10);
-            var pageSize = parseInt(rows, 10);
+            var startItem = parseInt(start);
+            var pageSize = parseInt(rows);
             var showingFrom = startItem + 1;
-            var showingTo = (startItem + pageSize <= maxItems) ? startItem + pageSize : maxItems ;
-            buf += '<div class="results-summary">Showing ' + showingFrom + " to " + showingTo + " of " + maxItems +
-                ' results for the query <pre>' + query + '</pre></div>'
+            var showingTo = (startItem + pageSize <= maxItems) ? startItem + pageSize : maxItems;
+            var buf =
+                '<div class="results-summary">' +
+                    'Showing ' + showingFrom + ' to ' + showingTo + ' of ' + maxItems + ' results for the query ' +
+                    '<pre>' +
+                        query +
+                    '</pre>' +
+                '</div>';
             // grab highlight text and store in map/hash
             var highlights = {};
             $.each(data.highlighting, function(idx, hl) {
                 highlights[idx] = hl.text[0];
             });
-            //console.log("highlighting", highlights, itemNumber);
             $.each(data.grouped.itemId.groups, function(idx, obj) {
                 buf += '<div class="result">';
                 buf += '<h3><b>' + itemNumber++;
@@ -661,14 +664,14 @@ function loadBhl(start, rows, scroll) {
                 buf += '(' + obj.doclist.numFound + '</b> matching page' + suffix + ')</h3><div class="thumbnail-container">';
 
                 $.each(obj.doclist.docs, function(idx, page) {
-                    var highlightText = $('<div>'+highlights[page.pageId]+'</div>').htmlClean({allowedTags: ["em"]}).html();
+                    var highlightText = $('<div>' + highlights[page.pageId] + '</div>').htmlClean({ allowedTags: ['em'] }).html();
                     buf += '<div class="page-thumbnail"><a target="page image" href="http://biodiversitylibrary.org/page/' +
                         page.pageId + '"><img src="http://biodiversitylibrary.org/pagethumb/' + page.pageId +
                         '" alt="' + escapeHtml(highlightText) + '"  width="60px" height="100px"/></a></div>';
-                })
-                buf += "</div><!--end .thumbnail-container -->";
-                buf += "</div>";
-            })
+                });
+                buf += '</div><!--end .thumbnail-container -->';
+                buf += '</div>';
+            });
 
             var prevStart = start - rows;
             var nextStart = start + rows;
@@ -684,30 +687,30 @@ function loadBhl(start, rows, scroll) {
 
             buf += '</div>';
 
-            $("#bhl-results-list").html(buf);
+            $('#bhl-results-list').html(buf);
             if(data.synonyms) {
-                buf = "<b>Synonyms used:</b>&nbsp;";
-                buf += data.synonyms.join(", ");
-                $("#synonyms").html(buf).css("display", "block");
+                buf = '<b>Synonyms used:</b>&nbsp;';
+                buf += data.synonyms.join(', ');
+                $('#synonyms').html(buf).css('display', 'block');
             } else {
-                $("#synonyms").html("").css("display", "none");
+                $('#synonyms').html('').css('display', 'none');
             }
-            $("#status-box").css("display", "none");
+            $('#status-box').css('display', 'none');
 
             if(scroll) {
-                $('html, body').animate({scrollTop: '300px'}, 300);
+                $('html, body').animate({ scrollTop: '300px' }, 300);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            $("#status-box").css("display", "none");
-            $("#solr-results").html('An error has occurred, probably due to invalid query syntax');
+            $('#status-box').css('display', 'none');
+            $('#solr-results').html('An error has occurred, probably due to invalid query syntax');
         }
     });
 } // end doSearch
 
 function cancelSearch(msg) {
-    $("#status-box").css("display", "none");
-    $("#solr-results").html(msg);
+    $('#status-box').css('display', 'none');
+    $('#solr-results').html(msg);
     return true;
 }
 
@@ -717,7 +720,7 @@ function loadExpertDistroMap() {
         if(data.available) {
             $('#expertDistroDiv img').attr('src', data.url);
             if(data.dataResourceName && data.dataResourceUrl) {
-                var attr = $('<a>').attr('href', data.dataResourceUrl).text(data.dataResourceName)
+                var attr = $('<a>').attr('href', data.dataResourceUrl).text(data.dataResourceName);
                 $('#expertDistroDiv #dataResource').html(attr);
             }
             $('#expertDistroDiv').show();
@@ -729,7 +732,7 @@ function toggleImageGallery(btn) {
     if($(btn).hasClass('fa-caret-square-o-up')) {
         $(btn).removeClass('fa-caret-square-o-up');
         $(btn).addClass('fa-caret-square-o-down');
-        $(btn).parents('.image-section').find('.taxon-gallery').slideUp(400)
+        $(btn).parents('.image-section').find('.taxon-gallery').slideUp(400);
     } else {
         $(btn).removeClass('fa-caret-square-o-down');
         $(btn).addClass('fa-caret-square-o-up');
@@ -753,7 +756,6 @@ function loadReferences(containerID, taxonID) {
         page_size: PAGE_SIZE
     };
 
-    var count = 0;
     var currentPage = 0;
     var pageCount = 0;
     var loadPage;
@@ -764,11 +766,9 @@ function loadReferences(containerID, taxonID) {
         page.forEach(function(occurrence) {
             var el = $(
                 '<li class="plutof-references__item">' +
-                    '<h3 class="plutof-references__header">' +
-                        '<a href="https://plutof.ut.ee/#/referencebased/view/' + occurrence.id + '">' +
-                            occurrence.reference +
-                        '</a>' +
-                    '</h3>' +
+                    '<a href="https://plutof.ut.ee/#/referencebased/view/' + occurrence.id + '">' +
+                        occurrence.reference +
+                    '</a>' +
                     '<div class="plutof-references__content">' +
                         occurrence.locality_text +
                     '</div>' +
