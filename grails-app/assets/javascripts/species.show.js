@@ -606,7 +606,7 @@ function loadBhl(start, rows, scroll) {
     }
 
     if(synonyms) {
-        synonyms = synonyms.replace(/\\\"/g,'"'); // remove escaped quotes
+        synonyms = synonyms.replace(/\\\"/g, '"'); // remove escaped quotes
 
         if(taxonName) {
             query += ' OR (' + synonyms + ')';
