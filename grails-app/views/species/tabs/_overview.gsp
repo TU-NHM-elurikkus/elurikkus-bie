@@ -167,7 +167,7 @@
                     </p>
 
                     <p>
-                        <a class="tab-link" href="#data-partners">
+                        <a class="tab-link" href="#data-partners" onclick="openTab('#data-partners')">
                             <g:message code="show.datasets.desc.01" />
                         </a>
                         <g:message code="show.datasets.desc.02" />

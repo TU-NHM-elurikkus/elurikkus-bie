@@ -1,5 +1,3 @@
-var SHOW_CONF;  // This constant is populated by show.gsp inline javascript
-
 function showSpeciesPage() {
     // load content
     loadOverviewImages();
@@ -173,7 +171,7 @@ function loadDataProviders() {
                 if(facetValue.count > 0) {
 
                     var uid = facetValue.fq.replace(/data_resource_uid:/, '').replace(/[\\"]*/, '').replace(/[\\"]/, '');
-                    var dataResourceUrl = SHOW_CONF.collectoryUrl + '/public/show/' + uid;
+                    var dataResourceUrl =  SHOW_CONF.collectoryUrl + '/public/show/' + uid;
                     var tableRow = '<tr><td><a href="' + dataResourceUrl + '"><span class="data-provider-name">' + facetValue.label + '</span></a>';
 
                     $.getJSON(SHOW_CONF.collectoryUrl + '/ws/dataResource/' + uid, function(collectoryData) {
@@ -201,7 +199,7 @@ function loadExternalSources() {
         // clone a description template...
         if(data.dataObjects) {
             $.each(data.dataObjects, function(idx, dataObject) {
-                if(dataObject.language === SHOW_CONF.eolLanguage || !dataObject.language) {
+                if(dataObject.language == SHOW_CONF.eolLanguage || !dataObject.language) {
                     var $description = $('#descriptionTemplate').clone();
                     $description.css({ 'display': 'block' });
                     $description.attr('id', dataObject.id);
@@ -221,7 +219,7 @@ function loadExternalSources() {
                         var sourceHtml = '';
 
                         if(sourceText.match('^http')) {
-                            sourceHtml = '<a href=\'' + sourceText + '\' target=\'eol\'>' + sourceText + '</a>';
+                            sourceHtml = '<a href=\'' + sourceText + '\' target=\'eol\'>' + sourceText + '</a>'
                         } else {
                             sourceHtml = sourceText;
                         }
@@ -262,25 +260,19 @@ function loadExternalSources() {
 
             var source = links[0];
 
-            var soundsDiv =
-                '<div class="panel panel-default">' +
-                    '<div class="panel-heading">' +
-                        '<h3 class="panel-title">' +
-                            'Sounds' +
-                        '</h3>' +
-                    '</div>' +
-                    '<div class="panel-body">' +
-                        '<audio controls class="audio-player">' +
-                            '<source src="' + source + '">Your browser doesn\'t support playing audio' +
-                        '</audio>' +
-                    '</div>' +
-                    '<div class="panel-footer audio-player-footer">' +
-                        '<p>';
+            var soundsDiv = '<div class="panel panel-default"><div class="panel-heading">';
+            soundsDiv += '<h3 class="panel-title">Sounds</h3></div><div class="panel-body">';
+            soundsDiv += '<audio controls class="audio-player">';
+
+            soundsDiv += '<source src="' + source + '">';
+
+            soundsDiv += "Your browser doesn't support playing audio</audio>"
+            soundsDiv += '</div><div class="panel-footer audio-player-footer"><p>';
 
             if(data.processed.attribution.collectionName) {
-                source = '';
+                var source = '';
                 var attrUrl = '';
-                var attrUrlPrefix = SHOW_CONF.collectoryUrl + '/public/show/';
+                var attrUrlafix = SHOW_CONF.collectoryUrl + '/public/show/';
 
                 if(data.raw.attribution.dataResourceUid) {
                     attrUrl = attrUrlPrefix + data.raw.attribution.dataResourceUid;
@@ -319,19 +311,19 @@ function loadExternalSources() {
  */
 function loadGalleries() {
     $('#gallerySpinner').show();
-    loadGalleryType('type', 0);
-    loadGalleryType('specimen', 0);
-    loadGalleryType('other', 0);
-    loadGalleryType('uncertain', 0);
+    loadGalleryType('type', 0)
+    loadGalleryType('specimen', 0)
+    loadGalleryType('other', 0)
+    loadGalleryType('uncertain', 0)
 }
 
 var entityMap = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
     '"': '&quot;',
-    '\'': '&#39;',
-    '/': '&#x2F;'
+    "'": '&#39;',
+    "/": '&#x2F;'
 };
 
 function escapeHtml(string) {
@@ -388,10 +380,10 @@ function addOverviewImages(imagesArray, hasPreferredImage) {
         addOverviewImage(imagesArray[0]);
     }
 
-    for(var j = 1; j < 5; j++) {
+    for(j = 1; j < 5; j++) {
         // load smaller thumb images
         if(imagesArray.length > j) {
-            addOverviewThumb(imagesArray[j], j);
+            addOverviewThumb(imagesArray[j], j)
         }
     }
 }
@@ -414,7 +406,7 @@ function addOverviewImage(overviewImageRecord) {
 }
 
 function addOverviewThumb(record, i) {
-    if(i < 4) {
+    if (i < 4) {
         var $thumb = generateOverviewThumb(record, i);
         $('#overview-thumbs').append($thumb);
     } else {
@@ -422,21 +414,17 @@ function addOverviewThumb(record, i) {
     }
 }
 
-function generateOverviewThumb(occurrence, id) {
-    var $taxonSummaryThumb = $('<div class="taxon-summary-thumb"></div>');
-    var $taxonSummaryThumbLink = $('<a></a>');
+function generateOverviewThumb(occurrence, id){
+    var $taxonSummaryThumb = $('#taxon-summary-thumb-template').clone();
+    var $taxonSummaryThumbLink = $taxonSummaryThumb.find('a');
+    $taxonSummaryThumb.removeClass('hidden-node');
     $taxonSummaryThumb.attr('id', 'taxon-summary-thumb-' + id);
     $taxonSummaryThumb.attr('style', 'background-image:url(' + occurrence.smallImageUrl + ')');
     $taxonSummaryThumbLink.attr('data-title', getImageTitleFromOccurrence(occurrence));
     $taxonSummaryThumbLink.attr('data-footer', getImageFooterFromOccurrence(occurrence));
-    $taxonSummaryThumbLink.attr('data-toggle', 'lightbox');
-    $taxonSummaryThumbLink.attr('data-parent', '.taxon-summary-gallery');
     $taxonSummaryThumbLink.attr('href', occurrence.largeImageUrl);
     $taxonSummaryThumbLink.attr('data-image-id', occurrence.image);
-    $taxonSummaryThumbLink.attr('data-gallery', 'taxon-summary-gallery');
     $taxonSummaryThumbLink.attr('data-record-url', SHOW_CONF.biocacheUrl + '/occurrences/' + occurrence.uuid);
-
-    $taxonSummaryThumb.append($taxonSummaryThumbLink);
     return $taxonSummaryThumb;
 }
 
@@ -475,34 +463,24 @@ function loadGalleryType(category, start) {
             $('#cat_nonavailable').addClass('hidden-node');
 
             $.each(data.occurrences, function(i, el) {
-                var $galleryGrid = $('<div/>', {
-                    class: 'gallery-thumb'
-                }).append(
-                    $('<a>', {
-                        'id': 'thumb_' + category + i,
-                        'data-toggle': 'lightbox',
-                        'href': el.largeImageUrl,
-                        'data-gallery': 'main-image-gallery',
-                        'rel': 'thumbs',
-                        'data-image-id': el.image,
-                        'data-record-url': SHOW_CONF.biocacheUrl + '/occurrences/' + el.uuid,
-                        'data-footer': getImageFooterFromOccurrence(el)
-                    }).append(
-                        $('<div>', {
-                            'class': 'gallery-thumb__footer'
-                        }).append(
-                            getImageTitleFromOccurrence(el)
-                        )
-                    ).append(
-                        $('<img>', {
-                            'class': 'img-fluid gallery-thumb__img',
-                            'src': el.smallImageUrl
-                        })
-                    )
-                );
+                // clone template div & populate with metadata
+                var $taxonThumb = $('.gallery-thumb-template').clone();
+                var $anchor = $taxonThumb.find('a.cbLink');
+
+                $taxonThumb.removeClass('gallery-thumb-template').removeClass('invisible');
+                $anchor.attr('id', 'thumb_' + category + i);
+                $anchor.attr('href', el.largeImageUrl);
+                $anchor.find('img').attr('src', el.smallImageUrl);
+
+                // brief metadata
+                var briefHtml = getImageTitleFromOccurrence(el);
+                $anchor.find('.gallery-thumb__footer').html(briefHtml);
 
                 // write to DOM
-                $categoryTmpl.find('.taxon-gallery').append($galleryGrid);
+                $anchor.attr('data-footer', getImageFooterFromOccurrence(el));
+                $anchor.attr('data-image-id', el.image);
+                $anchor.attr('data-record-url', SHOW_CONF.biocacheUrl + '/occurrences/' + el.uuid);
+                $categoryTmpl.find('.taxon-gallery').append($taxonThumb);
             });
 
             $('.loadMore.' + category).remove();  // remove 'load more images' button that was just clicked
@@ -562,18 +540,22 @@ function getImageFooterFromOccurrence(el) {
     var leftDetail =
         '<div class="col-sm-4 recordLink">' +
             '<a href="' + SHOW_CONF.biocacheUrl + '/occurrences/' + el.uuid + '">' +
-                '<span class="fa fa-list"></span> View records' +
+                'View details of this record' +
             '</a>' +
             '<br />' +
             '<br />' +
             'If this image is incorrectly identified please flag an issue on the ' +
-            '<a href="' + SHOW_CONF.biocacheUrl + '/occurrences/' + el.uuid + '">' +
+            '<a href=' + SHOW_CONF.biocacheUrl + '/occurrences/' + el.uuid + '>' +
                 'record.' +
             '</a>' +
         '</div>';
 
     var detailHtml = '<div class="row">' + rightDetail + leftDetail + '</div>';
     return detailHtml;
+}
+
+function loadBhl() {
+    loadBhl(0, 10, false);
 }
 
 /**
@@ -596,121 +578,118 @@ function loadBhl(start, rows, scroll) {
     var query = ''; // = taxonName.split(/\s+/).join(" AND ") + synonyms;
     if(taxonName) {
         var terms = taxonName.split(/\s+/).length;
-        if(terms > 2) {
-            query += taxonName.split(/\s+/).join(' AND ');
-        } else if(terms === 2) {
+        if (terms > 2) {
+            query += taxonName.split(/\s+/).join(" AND ");
+        } else if (terms == 2) {
             query += '"' + taxonName + '"';
         } else {
             query += taxonName;
         }
     }
 
-    if(synonyms) {
-        synonyms = synonyms.replace(/\\\"/g, '"'); // remove escaped quotes
+    if (synonyms) {
+        synonyms = synonyms.replace(/\\\"/g,'"'); // remove escaped quotes
 
-        if(taxonName) {
-            query += ' OR (' + synonyms + ')';
+        if (taxonName) {
+            query += ' OR (' + synonyms + ")"
         } else {
-            query += synonyms;
+            query += synonyms
         }
     }
 
-    if(!query) {
-        return cancelSearch('No names were found to search BHL');
+    if (!query) {
+        return cancelSearch("No names were found to search BHL");
     }
 
-    var url = 'http://bhlidx.ala.org.au/select?q=' + query + '&start=' + start + '&rows=' + rows +
-        '&wt=json&fl=name%2CpageId%2CitemId%2Cscore&hl=on&hl.fl=text&hl.fragsize=200&' +
-        'group=true&group.field=itemId&group.limit=7&group.ngroups=true&taxa=false';
+    var url = "http://bhlidx.ala.org.au/select?q=" + query + '&start=' + start + "&rows=" + rows +
+        "&wt=json&fl=name%2CpageId%2CitemId%2Cscore&hl=on&hl.fl=text&hl.fragsize=200&" +
+        "group=true&group.field=itemId&group.limit=7&group.ngroups=true&taxa=false";
 
-    $('#status-box').css('display', 'block');
-    $('#synonyms').html('').css('display', 'none');
-    $('#bhl-results-list').html('');
+    var buf = "";
+    $("#status-box").css("display", "block");
+    $("#synonyms").html("").css("display", "none")
+    $("#bhl-results-list").html("");
 
     $.ajax({
         url: url,
         dataType: 'jsonp',
-        jsonp: 'json.wrf',
-        success: function(data) {
-            var itemNumber = parseInt(data.responseHeader.params.start) + 1;
-            var maxItems = parseInt(data.grouped.itemId.ngroups);
-            if(maxItems === 0) {
-                return cancelSearch('No references were found for <pre>' + query + '</pre>');
+        jsonp: "json.wrf",
+        success:  function(data) {
+            var itemNumber = parseInt(data.responseHeader.params.start, 10) + 1;
+            var maxItems = parseInt(data.grouped.itemId.ngroups, 10);
+            if (maxItems == 0) {
+                return cancelSearch("No references were found for <pre>" + query + "</pre>");
             }
-            var startItem = parseInt(start);
-            var pageSize = parseInt(rows);
+            var startItem = parseInt(start, 10);
+            var pageSize = parseInt(rows, 10);
             var showingFrom = startItem + 1;
-            var showingTo = (startItem + pageSize <= maxItems) ? startItem + pageSize : maxItems;
-            var buf =
-                '<div class="results-summary">' +
-                    'Showing ' + showingFrom + ' to ' + showingTo + ' of ' + maxItems + ' results for the query ' +
-                    '<pre>' +
-                        query +
-                    '</pre>' +
-                '</div>';
+            var showingTo = (startItem + pageSize <= maxItems) ? startItem + pageSize : maxItems ;
+            buf += '<div class="results-summary">Showing ' + showingFrom + " to " + showingTo + " of " + maxItems +
+                ' results for the query <pre>' + query + '</pre></div>'
             // grab highlight text and store in map/hash
             var highlights = {};
             $.each(data.highlighting, function(idx, hl) {
                 highlights[idx] = hl.text[0];
             });
+            //console.log("highlighting", highlights, itemNumber);
             $.each(data.grouped.itemId.groups, function(idx, obj) {
                 buf += '<div class="result">';
                 buf += '<h3><b>' + itemNumber++;
                 buf += '.</b> <a target="item" href="http://biodiversitylibrary.org/item/' + obj.groupValue + '">' + obj.doclist.docs[0].name + '</a> ';
                 var suffix = '';
-                if(obj.doclist.numFound > 1) {
+                if (obj.doclist.numFound > 1) {
                     suffix = 's';
                 }
                 buf += '(' + obj.doclist.numFound + '</b> matching page' + suffix + ')</h3><div class="thumbnail-container">';
 
                 $.each(obj.doclist.docs, function(idx, page) {
-                    var highlightText = $('<div>' + highlights[page.pageId] + '</div>').htmlClean({ allowedTags: ['em'] }).html();
+                    var highlightText = $('<div>'+highlights[page.pageId]+'</div>').htmlClean({allowedTags: ["em"]}).html();
                     buf += '<div class="page-thumbnail"><a target="page image" href="http://biodiversitylibrary.org/page/' +
                         page.pageId + '"><img src="http://biodiversitylibrary.org/pagethumb/' + page.pageId +
                         '" alt="' + escapeHtml(highlightText) + '"  width="60px" height="100px"/></a></div>';
-                });
-                buf += '</div><!--end .thumbnail-container -->';
-                buf += '</div>';
-            });
+                })
+                buf += "</div><!--end .thumbnail-container -->";
+                buf += "</div>";
+            })
 
             var prevStart = start - rows;
             var nextStart = start + rows;
 
             buf += '<div id="button-bar">';
-            if(prevStart >= 0) {
+            if (prevStart >= 0) {
                 buf += '<input type="button" class="btn" value="Previous page" onclick="loadBhl(' + prevStart + ',' + rows + ', true)">';
             }
             buf += '&nbsp;&nbsp;&nbsp;';
-            if(nextStart <= maxItems) {
+            if (nextStart <= maxItems) {
                 buf += '<input type="button" class="btn" value="Next page" onclick="loadBhl(' + nextStart + ',' + rows + ', true)">';
             }
 
             buf += '</div>';
 
-            $('#bhl-results-list').html(buf);
-            if(data.synonyms) {
-                buf = '<b>Synonyms used:</b>&nbsp;';
-                buf += data.synonyms.join(', ');
-                $('#synonyms').html(buf).css('display', 'block');
+            $("#bhl-results-list").html(buf);
+            if (data.synonyms) {
+                buf = "<b>Synonyms used:</b>&nbsp;";
+                buf += data.synonyms.join(", ");
+                $("#synonyms").html(buf).css("display", "block");
             } else {
-                $('#synonyms').html('').css('display', 'none');
+                $("#synonyms").html("").css("display", "none");
             }
-            $('#status-box').css('display', 'none');
+            $("#status-box").css("display", "none");
 
-            if(scroll) {
-                $('html, body').animate({ scrollTop: '300px' }, 300);
+            if (scroll) {
+                $('html, body').animate({scrollTop: '300px'}, 300);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            $('#status-box').css('display', 'none');
-            $('#solr-results').html('An error has occurred, probably due to invalid query syntax');
+            $("#status-box").css("display", "none");
+            $("#solr-results").html('An error has occurred, probably due to invalid query syntax');
         }
     });
 } // end doSearch
 
 function cancelSearch(msg) {
-    $('#status-box').css('display', 'none');
-    $('#solr-results').html(msg);
+    $("#status-box").css("display", "none");
+    $("#solr-results").html(msg);
     return true;
 }
 
@@ -720,7 +699,7 @@ function loadExpertDistroMap() {
         if(data.available) {
             $('#expertDistroDiv img').attr('src', data.url);
             if(data.dataResourceName && data.dataResourceUrl) {
-                var attr = $('<a>').attr('href', data.dataResourceUrl).text(data.dataResourceName);
+                var attr = $('<a>').attr('href', data.dataResourceUrl).text(data.dataResourceName)
                 $('#expertDistroDiv #dataResource').html(attr);
             }
             $('#expertDistroDiv').show();
@@ -732,7 +711,7 @@ function toggleImageGallery(btn) {
     if($(btn).hasClass('fa-caret-square-o-up')) {
         $(btn).removeClass('fa-caret-square-o-up');
         $(btn).addClass('fa-caret-square-o-down');
-        $(btn).parents('.image-section').find('.taxon-gallery').slideUp(400);
+        $(btn).parents('.image-section').find('.taxon-gallery').slideUp(400)
     } else {
         $(btn).removeClass('fa-caret-square-o-down');
         $(btn).addClass('fa-caret-square-o-up');
@@ -756,6 +735,7 @@ function loadReferences(containerID, taxonID) {
         page_size: PAGE_SIZE
     };
 
+    var count = 0;
     var currentPage = 0;
     var pageCount = 0;
     var loadPage;
@@ -766,9 +746,11 @@ function loadReferences(containerID, taxonID) {
         page.forEach(function(occurrence) {
             var el = $(
                 '<li class="plutof-references__item">' +
-                    '<a href="https://plutof.ut.ee/#/referencebased/view/' + occurrence.id + '">' +
-                        occurrence.reference +
-                    '</a>' +
+                    '<h3 class="plutof-references__header">' +
+                        '<a href="https://plutof.ut.ee/#/referencebased/view/' + occurrence.id + '">' +
+                            occurrence.reference +
+                        '</a>' +
+                    '</h3>' +
                     '<div class="plutof-references__content">' +
                         occurrence.locality_text +
                     '</div>' +

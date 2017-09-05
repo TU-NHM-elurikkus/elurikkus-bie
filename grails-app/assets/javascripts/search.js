@@ -50,10 +50,6 @@ function removeFacet(facetIdx) {
     var q = $.getQueryParam('q') ? $.getQueryParam('q') : SEARCH_CONF.query; // $.query.get('q')[0];
     var fqList = $.getQueryParam('fq'); // $.query.get('fq');
 
-    console.log('Remove facet.,...');
-    console.log(facetIdx);
-    console.log(fqList);
-
     var paramList = [];
 
     if(q !== null) {
@@ -69,7 +65,6 @@ function removeFacet(facetIdx) {
         paramList.push('fq=');
     }
 
-    console.log('new URL: ' + window.location.pathname + '?' + paramList.join('&'));
     window.location.href = window.location.pathname + '?' + paramList.join('&');
 }
 
@@ -89,33 +84,36 @@ function removeAllFacets() {
  */
 function reloadWithParam(paramName, paramValue) {
     var paramList = [];
-    var q = $.getQueryParam('q') ? $.getQueryParam('q') : SEARCH_CONF.query;
-    var fqList = $.getQueryParam('fq'); // $.query.get('fq');
+    var q = $.getQueryParam('q');
+    var fqList = $.getQueryParam('fq');
     var sort = $.getQueryParam('sortField');
     var dir = $.getQueryParam('dir');
 
+    q = q ? q : SEARCH_CONF.query;
+    dir = dir ? dir : $('select#sort-order').val();
+
     // add query param
-    if(q !== null) {
+    if(q) {
         paramList.push('q=' + q);
     }
 
     // add filter query param
-    if(fqList !== null) {
+    if(fqList) {
         paramList.push('fq=' + fqList.join('&fq='));
     }
 
     // add sort param if already set
-    if(paramName !== 'sortField' && sort !== null) {
+    if(paramName !== 'sortField' && sort) {
         paramList.push('sortField=' + sort);
     }
 
     // add dir param if already set
-    if(paramName !== 'dir' && dir !== null) {
+    if(paramName !== 'dir' && dir) {
         paramList.push('dir=' + dir);
     }
 
     // add the changed value
-    if(paramName !== null && paramValue !== null) {
+    if(paramName && paramValue) {
         paramList.push(paramName + '=' + paramValue);
     }
 
@@ -158,7 +156,8 @@ function numberWithCommas(x) {
 
 function injectBiocacheResults() {
     var queryToUse = (SEARCH_CONF.query === '' || SEARCH_CONF.query === '*' ? '*:*' : SEARCH_CONF.query);
-    var url = SEARCH_CONF.biocacheServicesUrl + '/occurrences/search.json?q=' + queryToUse + '&start=0&pageSize=0&facet=off&qc=' + SEARCH_CONF.biocacheQueryContext;
+    var url = SEARCH_CONF.biocacheServicesUrl + '/occurrences/search.json?q=' + queryToUse +
+        '&start=0&pageSize=0&facet=off&qc=' + SEARCH_CONF.biocacheQueryContext;
 
     $.ajax({
         url: url,
