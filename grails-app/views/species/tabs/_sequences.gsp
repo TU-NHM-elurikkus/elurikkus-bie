@@ -1,7 +1,7 @@
 <section class="tab-pane" id="sequences" role="tabpanel">
     <div id="sequences-plutof">
         <h3>
-            PlutoF
+            <g:message code="show.sequences.subtitle" />
             <span class="sequences__count"></span>
         </h3>
 
