@@ -360,7 +360,7 @@ function loadOverviewImages() {
             }
 
         }).fail(function(jqxhr, textStatus, error) {
-            alert('Error loading overview image: ' + textStatus + ', ' + error);
+            console.warn('Error loading overview image: ' + textStatus + ', ' + error);
             hasPreferredImage = false;
         });
     }
@@ -375,7 +375,7 @@ function loadOverviewImages() {
             addOverviewImages(data.occurrences, hasPreferredImage);
         }
     }).fail(function(jqxhr, textStatus, error) {
-        alert('Error loading overview images: ' + textStatus + ', ' + error);
+        console.warn('Error loading overview images: ' + textStatus + ', ' + error);
     }).always(function() {
         $('#gallerySpinner').hide();
     });
@@ -522,7 +522,7 @@ function loadGalleryType(category, start) {
             }
         }
     }).fail(function(jqxhr, textStatus, error) {
-        alert('Error loading gallery: ' + textStatus + ', ' + error);
+        console.warn('Error loading gallery: ' + textStatus + ', ' + error);
     }).always(function() {
         $('#gallerySpinner').hide();
     });
