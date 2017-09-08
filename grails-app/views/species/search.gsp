@@ -58,7 +58,7 @@
             <g:if test="${searchResults.totalRecords}">
                 <g:set var="paramsValues" value="${[:]}" />
 
-                <div class="search-header">
+                <div class="vertical-block">
                     <span class="fa fa-info-circle"></span>
                     <g:message code="search.facets.refine" />
                 </div>

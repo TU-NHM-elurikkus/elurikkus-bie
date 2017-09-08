@@ -414,29 +414,9 @@ a.expand-options {
     flex-wrap: wrap;
 }
 
-.bie-card {
-    padding: 0;
-}
-
-.bie-card .card-header {
-    padding: 10px;
-    padding-bottom: 0;
-}
-
-.bie-card .card-footer {
-    padding: 10px;
-    padding-bottom: 0;
-}
-
-.bie-vertical-space, .species-list-block {
-    margin-bottom: 20px;
-}
-
 .card-footer p:last-child {
     margin-bottom: 0;
-    padding-bottom: 1rem;
 }
-
 
 /* plutof-references */
 

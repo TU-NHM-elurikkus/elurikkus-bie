@@ -158,9 +158,9 @@
         </div>
 
         <!-- description template -->
-        <div id="descriptionTemplate" class="card bie-card panel-description bie-vertical-space" style="display:none;">
+        <div id="descriptionTemplate" class="card detached-card panel-description" style="display:none;">
             <div class="card-header">
-                <h3 class="card-title title"></h3>
+                <h3 class="title"></h3>
             </div>
 
             <div class="card-body">

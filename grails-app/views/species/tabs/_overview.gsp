@@ -1,8 +1,8 @@
 <section class="tab-pane active" id="overview" role="tabpanel">
     <div class="row taxon-row">
         <div class="col-md-5">
-            <div class="taxon-summary-gallery">
-                <div class="main-img hidden-node">
+            <div class="taxon-summary-gallery hidden-node">
+                <div class="main-img">
                     <a
                         class="lightbox-img"
                         data-toggle="lightbox"
@@ -15,7 +15,7 @@
 
                 </div>
 
-                <div class="thumb-row hidden-node">
+                <div class="thumb-row">
                     <div id="overview-thumbs"></div>
 
                     <div id="more-photo-thumb-link" class="taxon-summary-thumb">
@@ -36,7 +36,7 @@
             <g:if test="${tc.conservationStatuses}">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">
+                        <h3>
                             <g:message code="show.overview.conservationStatus" />
                         </h3>
                     </div>
@@ -74,7 +74,7 @@
 
             <div class="card bie-card">
                 <div class="card-header">
-                    <h3 class="card-title">
+                    <h3>
                         <g:message code="show.overview.onlineResources" />
                     </h3>
                 </div>
@@ -148,9 +148,9 @@
                 </div>
             </div>
 
-            <div class="card bie-card panel-data-providers bie-vertical-space">
+            <div class="card detached-card panel-data-providers">
                 <div class="card-header">
-                    <h3 class="card-title">
+                    <h3>
                         <g:message code="show.datasets.title" />
                     </h3>
                 </div>
