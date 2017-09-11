@@ -2,9 +2,10 @@
     <g:each in="${["type", "specimen", "other", "uncertain"]}" var="cat">
         <div id="cat_${cat}" class="hidden-node image-section">
             <h3>
-                <g:message code="images.heading.${cat}" default="${cat}" />
-
-                <span class="fa fa-caret-square-o-up" onclick="toggleImageGallery(this)" ></span>
+                <a href="javascript:void(0)" onclick="toggleImageGallery(this)" class="undecorated">
+                    <g:message code="images.heading.${cat}" default="${cat}" />
+                    <span class="fa fa-caret-square-o-up"></span>
+                </a>
             </h3>
 
             <div class="taxon-gallery"></div>

@@ -770,14 +770,16 @@ function loadExpertDistroMap() {
 }
 
 function toggleImageGallery(btn) {
-    if($(btn).hasClass('fa-caret-square-o-up')) {
-        $(btn).removeClass('fa-caret-square-o-up');
-        $(btn).addClass('fa-caret-square-o-down');
-        $(btn).parents('.image-section').find('.taxon-gallery').slideUp(400);
+    var iSpan = $(btn).find("span.fa-caret-square-o-up");
+    if(iSpan.length) {
+        iSpan.removeClass("fa-caret-square-o-up");
+        iSpan.addClass("fa-caret-square-o-down");
+        $(iSpan).parents('.image-section').find('.taxon-gallery').slideUp(400);
     } else {
-        $(btn).removeClass('fa-caret-square-o-down');
-        $(btn).addClass('fa-caret-square-o-up');
-        $(btn).parents('.image-section').find('.taxon-gallery').slideDown(400);
+        iSpan = $(btn).find("span.fa-caret-square-o-down");
+        iSpan.removeClass("fa-caret-square-o-down");
+        iSpan.addClass("fa-caret-square-o-up");
+        $(iSpan).parents('.image-section').find('.taxon-gallery').slideDown(400);
     }
 }
 
