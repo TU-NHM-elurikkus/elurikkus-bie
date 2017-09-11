@@ -29,9 +29,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>
-            ${tc?.taxonConcept?.nameString} ${(tc?.commonNames) ? ' : ' + tc?.commonNames?.get(0)?.nameString : ''} | ${raw(grailsApplication.config.skin.orgNameLong)}
+            ${tc?.taxonConcept?.nameString} ${(tc?.commonNames) ? ' : ' + tc?.commonNames?.get(0)?.nameString : ''}
         </title>
-
         <meta name="layout" content="${grailsApplication.config.skin.layout}" />
 
     </head>
