@@ -51,7 +51,9 @@
 
                     <g:set var="commonNameDisplay" value="${(tc?.commonNames) ? tc?.commonNames?.opt(0)?.nameString : ''}" />
 
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
+                        <g:message code="show.details.rank" />
+                        :
                         ${tc.taxonConcept.rankString}
                     </div>
 
@@ -63,13 +65,6 @@
                             <g:message code="taxonomicStatus.${tc.taxonConcept.taxonomicStatus}" default="${tc.taxonConcept.taxonomicStatus}" />
                         </div>
                     </g:if>
-
-                    <div class="inline-head name-authority col-sm-8">
-                        <g:message code="show.details.nameAuthority" />:
-                        <span class="name-authority">
-                            ${tc?.taxonConcept.nameAuthority ?: grailsApplication.config.defaultNameAuthority}
-                        </span>
-                    </div>
                 </div>
 
                 <div class="page-header-links">
