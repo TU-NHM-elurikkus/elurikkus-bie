@@ -176,12 +176,6 @@
             </div>
         </div>
 
-        <!-- sequence template -->
-        <div id="sequenceTemplate" class="result hidden-node">
-            <a href="" class="externalLink"></a>
-            <p class="description"></p>
-        </div>
-
         <!-- indigenous-profile-summary template -->
         <div id="indigenous-profile-summary-template" class="hidden-node padding-bottom-2">
             <div class="indigenous-profile-summary row">

@@ -863,18 +863,21 @@ function loadPlutoFSequences(containerID, taxonID) {
         page.forEach(function(entry) {
             var $entry = $('#sequenceTemplate').clone();
             var content = '';
+            var $eLink = $entry.find('.externalLink');
 
             $entry.attr('id', 'sequence-' + $entry.attr('id'));
             $entry.removeAttr('id'); // Do not clone the ID.
-            $entry.find('.externalLink').attr('href', 'https://plutof.ut.ee/#/sequence/view/' + entry.id);
-            $entry.find('.externalLink').html(entry.name);
+            $eLink.attr('href', 'https://plutof.ut.ee/#/sequence/view/' + entry.id);
+            $eLink.html(entry.name);
 
-            if(entry.sequence_types) {
-                content += 'Sequenced regions: ' + entry.sequence_types + '<br>';
+            if(entry.sequence_types.length) {
+                content += $entry.find('.sequence-regions').text() + entry.sequence_types.join(', ');
+                content += '<br />';
             }
 
             if(entry.gathering_agents) {
-                content += 'Collected by: ' + [entry.gathering_agents].join(', ') + '<br>';
+                content += $entry.find('.sequence-collected-by').text() + entry.gathering_agents;
+                content += '<br />';
             }
 
             $entry.find('.description').html(content);

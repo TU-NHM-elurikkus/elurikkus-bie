@@ -11,4 +11,19 @@
             <div class="sequences__pagination"></div>
         </div>
     </div>
+
+    <!-- sequence template -->
+    <div id="sequenceTemplate" class="result hidden-node">
+        <a href="" class="externalLink" target="_blank"></a>
+        <p class="description">
+            <span class="sequence-regions hidden-node">
+                <g:message code="show.sequences.regions" />:
+            </span>
+            <br />
+            <span class="sequence-collected-by hidden-node">
+                <g:message code="show.sequences.collectedBy" />:
+            </span>
+            <br />
+        </p>
+    </div>
 </section>
