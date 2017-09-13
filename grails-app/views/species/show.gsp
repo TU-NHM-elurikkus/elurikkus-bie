@@ -163,15 +163,18 @@
 
             <div class="card-footer">
                 <p class="source">
-                    <g:message code="show.names.field.source" />: <span class="sourceText"></span>
+                    <g:message code="show.names.field.source" />:
+                    <span class="sourceText"></span>
                 </p>
 
                 <p class="rights">
-                    <g:message code="show.overview.field.rightsHolder" />: <span class="rightsText"></span>
+                    <g:message code="show.overview.field.rightsHolder" />:
+                    <span class="rightsText"></span>
                 </p>
 
                 <p class="provider">
-                    <g:message code="show.overview.field.providedBy" />: <a href="#" class="providedBy"></a>
+                    <g:message code="show.overview.field.providedBy" />:
+                    <a href="#" class="providedBy" target="_blank"></a>
                 </p>
             </div>
         </div>

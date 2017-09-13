@@ -253,7 +253,7 @@ function loadExternalSources() {
                         var sourceHtml = '';
 
                         if(sourceText.match('^http')) {
-                            sourceHtml = '<a href="' + sourceText + '" target="eol">' + sourceText + '</a>';
+                            sourceHtml = '<a href="' + sourceText + '" target="_blank">' + sourceText + '</a>';
                         } else {
                             sourceHtml = sourceText;
                         }
@@ -327,7 +327,7 @@ function loadExternalSources() {
 
                 if(attrUrl) {
                     source +=
-                        'Source: <a href=\'' + attrUrl + '\' target=\'biocache\'>' +
+                        'Source: <a href="' + attrUrl + '" target="biocache">' +
                             data.processed.attribution.collectionName +
                         '</a>';
                 } else {
@@ -697,7 +697,7 @@ function loadBhl(start, rows, scroll) {
             $.each(data.grouped.itemId.groups, function(idx, obj) {
                 buf += '<div class="result">';
                 buf += '<h3><b>' + itemNumber++;
-                buf += '.</b> <a target="item" href="http://biodiversitylibrary.org/item/' + obj.groupValue + '">' + obj.doclist.docs[0].name + '</a> ';
+                buf += '.</b> <a target="_blank" href="http://biodiversitylibrary.org/item/' + obj.groupValue + '">' + obj.doclist.docs[0].name + '</a> ';
                 var suffix = '';
                 if(obj.doclist.numFound > 1) {
                     suffix = 's';
@@ -706,7 +706,7 @@ function loadBhl(start, rows, scroll) {
 
                 $.each(obj.doclist.docs, function(idx, page) {
                     var highlightText = $('<div>' + highlights[page.pageId] + '</div>').htmlClean({ allowedTags: ['em'] }).html();
-                    buf += '<div class="page-thumbnail"><a target="page image" href="http://biodiversitylibrary.org/page/' +
+                    buf += '<div class="page-thumbnail"><a target="_blank" href="http://biodiversitylibrary.org/page/' +
                         page.pageId + '"><img src="http://biodiversitylibrary.org/pagethumb/' + page.pageId +
                         '" alt="' + escapeHtml(highlightText) + '"  width="60px" height="100px"/></a></div>';
                 });
@@ -809,7 +809,7 @@ function loadReferences(containerID, taxonID) {
         page.forEach(function(occurrence) {
             var el = $(
                 '<li class="plutof-references__item">' +
-                    '<a href="https://plutof.ut.ee/#/referencebased/view/' + occurrence.id + '">' +
+                    '<a href="https://plutof.ut.ee/#/referencebased/view/' + occurrence.id + '" target="_blank">' +
                         occurrence.reference +
                     '</a>' +
                     '<div class="plutof-references__content">' +
