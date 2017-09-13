@@ -12,7 +12,7 @@
     </h3>
 
     <g:if test="${tc.taxonConcept.rankID < 7000}">
-        <div class="col-sm-6 col-xs-12 classification-actions">
+        <div class="col classification-actions">
             <div class="page-header-links">
                 <g:set var="taxonName">
                     <bie:formatSciName
@@ -59,7 +59,7 @@
     </g:if>
 
     <div class="row">
-        <div class="col-sm-6 col-xs-12">
+        <div class="col">
             <g:each in="${taxonHierarchy}" var="taxon">
                 <!-- taxon = ${taxon} -->
                 <g:if test="${taxon.guid != tc.taxonConcept.guid}">
