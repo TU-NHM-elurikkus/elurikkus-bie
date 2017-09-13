@@ -166,12 +166,12 @@
 
                     <div class="col-md-9">
                         <div id="search-results-panel" class="card card-body">
-                            <div class="search-controls">
+                            <div>
                                 <g:if test="${idxTypes.contains("TAXON")}">
                                     <g:set var="downloadUrl" value="${grailsApplication.config.bie.index.url}/download?${request.queryString?:''}${grailsApplication.config.bieService.queryContext}" />
 
                                     <%-- XXX XXX XXX --%>
-                                    <a class="download-button" href="${downloadUrl}" title="Download a list of taxa for your search">
+                                    <a class="download-button float-left" href="${downloadUrl}" title="Download a list of taxa for your search">
                                         <button class="erk-button erk-button--light">
                                             <span class="fa fa-download"></span>
                                             <g:message code="general.btn.download" />
@@ -179,8 +179,8 @@
                                     </a>
                                 </g:if>
 
-                                <form class="form-inline float-right">
-                                    <div class="form-group">
+                                <div class="inline-controls inline-controls--right">
+                                    <div class="inline-controls__group">
                                         <label for="per-page">
                                             <g:message code="search.controls.pageSize" />
                                         </label>
@@ -193,7 +193,7 @@
                                         />
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="inline-controls__group">
                                         <label for="sort-by">
                                             <g:message code="search.controls.sortBy.label" />
                                         </label>
@@ -208,7 +208,7 @@
 
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="inline-controls__group">
                                         <label for="sort-order">
                                             <g:message code="search.controls.sortOrder.label" />
                                         </label>
@@ -222,7 +222,7 @@
                                         >
                                         </g:select>
                                     </div>
-                                </form>
+                                </div>
                             </div>
 
                             <input type="hidden" value="${pageTitle}" name="title" />
