@@ -29,7 +29,7 @@ class BieTagLib {
         def nameFormatted = attrs.nameFormatted
         def rankId = attrs.rankId ?: 0
         def name = attrs.nameComplete ?: attrs.name
-        def rank = cssRank(rankId)
+        def rank = attrs.rank
         def accepted = attrs.acceptedName
         def taxonomicStatus = attrs.taxonomicStatus
         def parsed = { n, r, incAuthor ->
@@ -253,55 +253,3 @@ class BieTagLib {
     def static escapeJS(String value) {
         return StringEscapeUtils.escapeJavaScript(value);
     }
-
-    /**
-     * Get a default rank grouping for a rank ID.
-     * <p>
-     * See bie-index taxonRanks.properties for the rank structure
-     *
-     * @param rankId The rank identifier
-     *
-     * @return The grouping
-     */
-    private def cssRank(int rankId) {
-        if (rankId <= 0)
-            return "unknown"
-        if (rankId <= 1200)
-            return "kingdom"
-        if (rankId <= 2200)
-            return "phylum"
-        if (rankId <= 3400)
-            return "class"
-        if (rankId <= 4400)
-            return "order"
-        if (rankId <= 5700)
-            return "famnily"
-        if (rankId < 7000)
-            return "genus"
-        if (rankId < 8000)
-            return "species"
-        return "subspecies"
-    }
-
-    private String languageName(String lang) {
-        synchronized (this.class) {
-            if (languages == null) {
-                JsonSlurper slurper = new JsonSlurper()
-                def ld = slurper.parse(new URL(grailsApplication.config.languageCodesUrl))
-                languages = [:]
-                ld.codes.each { code ->
-                    if (languages.containsKey(code.code))
-                        log.warn "Duplicate language code ${code.code}"
-                    languages[code.code] = code
-                    if (code.part2b && !languages.containsKey(code.part2b))
-                        languages[code.part2b] = code
-                    if (code.part2t && !languages.containsKey(code.part2t))
-                        languages[code.part2t] = code
-                    if (code.part1 && !languages.containsKey(code.part1))
-                        languages[code.part1] = code
-                }
-            }
-        }
-        return languages[lang]?.name ?: lang
-    }
-}

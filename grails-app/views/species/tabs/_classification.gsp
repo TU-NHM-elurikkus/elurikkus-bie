@@ -61,14 +61,12 @@
     <div class="row">
         <div class="col">
             <g:each in="${taxonHierarchy}" var="taxon">
-                <!-- taxon = ${taxon} -->
+                <%-- if not current taxon --%>
                 <g:if test="${taxon.guid != tc.taxonConcept.guid}">
                     <%-- XXX Intentional unclosed tag. --%>
                     <dl>
                         <dt>
-                            <g:if test="${taxon.rankID ?: 0 != 0}">
-                                <g:message code="rank.${taxon.rank.replaceAll('[\\W]_', '')}" />
-                            </g:if>
+                            <g:message code="rank.${taxon.rank.replaceAll('[\\W]_', '')}" default="${taxon.rank}" />
                         </dt>
 
                         <dd>
@@ -104,7 +102,7 @@
             <dl class="child-taxa">
                 <g:each in="${childConcepts}" var="child" status="i">
                     <dt>
-                        <g:message code="rank.${child.rank.replaceAll('[\\W]_', '')}" />
+                        <g:message code="rank.${child.rank.replaceAll('[\\W]_', '')}" default="${child.rank}" />
                     </dt>
 
                     <g:set var="taxonLabel">
