@@ -244,7 +244,7 @@
                                             </g:if>
 
                                             <div class="search-result__header">
-                                                ${result.rank}:
+                                                <g:message code="taxonomy.rank.${result.rank}" />:
 
                                                 <a href="${speciesPageLink}">
                                                     <span class="fa fa-tag"></span>
@@ -260,7 +260,7 @@
 
                                                 <g:if test="${result.commonNameSingle}">
                                                     <span class="commonNameSummary">
-                                                        &nbsp;&ndash;&nbsp;${result.commonNameSingle}
+                                                        |&nbsp;${result.commonNameSingle}
                                                     </span>
                                                 </g:if>
                                             </div>

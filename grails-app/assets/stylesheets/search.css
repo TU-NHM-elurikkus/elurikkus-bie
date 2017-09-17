@@ -14,8 +14,6 @@
 
 .search-result__header {
     padding: 0.5em 0;
-    font-size: 14px;
-    font-weight: 700;
 }
 
 .search-result__all-common-names, .search-result__extra-field, .search-result__description, .search-result__view-records {
