@@ -244,7 +244,7 @@
                                             </g:if>
 
                                             <div class="search-result__header">
-                                                <g:message code="taxonomy.rank.${result.rank}" />:
+                                                <g:message code="taxonomy.rank.${result.rank}" default="${result.rank}"/>:
 
                                                 <a href="${speciesPageLink}">
                                                     <span class="fa fa-tag"></span>
