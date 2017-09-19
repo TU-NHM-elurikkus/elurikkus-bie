@@ -34,7 +34,7 @@
             class="active-filters__clear-all-button"
             onclick="removeAllFacets();"
         >
-            <g:message code="general.btn.clearAll" />
+            <g:message code="general.btn.clearAll.label" />
         </span>
     </g:if>
 </p>

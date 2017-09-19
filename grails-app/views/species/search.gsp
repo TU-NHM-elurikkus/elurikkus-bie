@@ -15,13 +15,11 @@
         <g:javascript>
             // global var to pass GSP vars into JS file
             var SEARCH_CONF = {
-                searchResultTotal: "${searchResults.totalRecords}",
                 query: "${BieTagLib.escapeJS(query)}",
                 serverName: "${grailsApplication.config.grails.serverURL}",
                 bieUrl: "${grailsApplication.config.bie.baseURL}",
                 biocacheUrl: "${biocacheUrl}",
                 biocacheServicesUrl: "${grailsApplication.config.biocacheService.baseURL}",
-                bhlUrl: "${grailsApplication.config.bhl.baseURL}",
                 biocacheQueryContext: "${grailsApplication.config.biocacheService.queryContext}",
                 geocodeLookupQuerySuffix: "${grailsApplication.config.geocode.querySuffix}"
             }
@@ -174,7 +172,7 @@
                                     <a class="download-button float-left" href="${downloadUrl}" title="Download a list of taxa for your search">
                                         <button class="erk-button erk-button--light">
                                             <span class="fa fa-download"></span>
-                                            <g:message code="general.btn.download" />
+                                            <g:message code="general.btn.download.label" />
                                         </button>
                                     </a>
                                 </g:if>

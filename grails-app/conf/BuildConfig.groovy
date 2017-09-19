@@ -48,5 +48,7 @@ grails.project.dependency.resolution = {
         compile ":elurikkus-bie:1.3.0-SNAPSHOT"
         compile ":elurikkus-charts:1.3"
         compile ":elurikkus-commons:0.2-SNAPSHOT"
+
+        runtime ":file-server:0.2.1"
     }
 }

@@ -76,7 +76,7 @@ grails.enable.native2ascii = true
 // packages to include in Spring bean scanning
 grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
-grails.web.disable.multipart=false
+grails.web.disable.multipart = false
 
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
@@ -99,6 +99,11 @@ environments {
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
+
+// Serve i18n messages files over http. Needed for i18n support in .js files
+grails.plugins.fileserver.paths = [
+    "messages": "grails-app/i18n/"
+]
 
 // log4j configuration
 log4j.main = {

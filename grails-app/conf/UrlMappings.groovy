@@ -17,6 +17,8 @@ class UrlMappings {
             }
         }
 
+        "/download/$root/$path**" (controller: "file")
+
         "500" (view: "/error")
 	}
 }

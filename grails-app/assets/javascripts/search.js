@@ -168,7 +168,7 @@ function injectBiocacheResults() {
             var html =
             '<a href="' + url + '" class="page-header-links__link">' +
                 '<span class="fa fa-list"></span>\n' +
-                'View records (' + numberWithCommas(maxItems) + ')' +
+                $.i18n.prop('show.map.btn.viewRecords') + ' (' + numberWithCommas(maxItems) + ')' +
             '</a>';
 
             insertSearchLinks(html);

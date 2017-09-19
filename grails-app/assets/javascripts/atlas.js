@@ -3,6 +3,7 @@
 //= require jquery.sortElemets
 //= require jquery.htmlClean
 //= require jquery.jsonp-2.3.1.min
+//= require jquery-i18n-properties-1.2.7
 //= require leaflet
 //= require ekko-lightbox-5.2.0
 //= require moment.min
