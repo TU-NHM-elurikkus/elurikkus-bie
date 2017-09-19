@@ -298,7 +298,7 @@ function loadExternalSources() {
                 '<div class="panel panel-default">' +
                     '<div class="panel-heading">' +
                         '<h3 class="panel-title">' +
-                            'Sounds' +
+                            $.i18n.prop('show.sounds') +
                         '</h3>' +
                     '</div>' +
                     '<div class="panel-body">' +
@@ -327,7 +327,7 @@ function loadExternalSources() {
 
                 if(attrUrl) {
                     source +=
-                        'Source: <a href="' + attrUrl + '" target="biocache">' +
+                        $.i18n.prop('show.names.field.source') + ': <a href="' + attrUrl + '" target="biocache">' +
                             data.processed.attribution.collectionName +
                         '</a>';
                 } else {
@@ -341,7 +341,7 @@ function loadExternalSources() {
 
             soundsDiv +=
                             '<a href="' + SHOW_CONF.biocacheUrl + '/occurrence/' + data.raw.uuid + '"> ' +
-                                'View more details of this audio' +
+                                $.i18n.prop('show.sounds.details') +
                             '</a>' +
                         '</p>' +
                     '</div>' +

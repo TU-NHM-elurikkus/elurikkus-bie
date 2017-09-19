@@ -162,7 +162,7 @@
                         </strong>
                         <g:message
                             code="show.datasets.summary"
-                            args="${[grailsApplication.config.skin.orgNameShort, tc.taxonConcept.rankString]}"
+                            args="${[tc.taxonConcept.rankString]}"
                         />
                     </p>
 
@@ -171,12 +171,6 @@
                             <g:message code="show.datasets.desc.01" />
                         </a>
                         <g:message code="show.datasets.desc.02" />
-                        <g:if test="${tc.taxonConcept?.rankID > 6000}">
-                            <g:message code="show.datasets.desc.03" args="${[raw(sciNameFormatted)]}" />
-                        </g:if>
-                        <g:else>
-                            <g:message code="show.datasets.desc.04" args="${[raw(sciNameFormatted)]}" />
-                        </g:else>
                     </p>
                 </div>
             </div>
