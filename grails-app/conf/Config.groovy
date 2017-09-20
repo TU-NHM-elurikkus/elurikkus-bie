@@ -100,11 +100,6 @@ environments {
     }
 }
 
-// Serve i18n messages files over http. Needed for i18n support in .js files
-grails.plugins.fileserver.paths = [
-    "messages": "grails-app/i18n/"
-]
-
 // log4j configuration
 log4j.main = {
     // Example of changing the log pattern for the default console appender:
