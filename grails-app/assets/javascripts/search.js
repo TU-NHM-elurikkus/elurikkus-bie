@@ -164,19 +164,14 @@ function injectBiocacheResults() {
         dataType: 'jsonp',
         success:  function(data) {
             var maxItems = parseInt(data.totalRecords);
-            var url = SEARCH_CONF.biocacheUrl + '/occurrences/search?q=' + queryToUse;
-            var html =
-            '<a href="' + url + '" class="page-header-links__link">' +
-                '<span class="fa fa-list"></span>\n' +
-                $.i18n.prop('show.map.btn.viewRecords') + ' (' + numberWithCommas(maxItems) + ')' +
-            '</a>';
-
-            insertSearchLinks(html);
+            var $viewBtn = $("#view-records-btn");
+            $viewBtn.attr("href", SEARCH_CONF.biocacheUrl + '/occurrences/search?q=' + queryToUse);
+            $viewBtn.html(
+                '<span class="fa fa-list"></span>' +
+                '&nbsp;' +
+                $.i18n.prop('show.map.btn.viewRecords') + ' (' + numberWithCommas(maxItems) + ')'
+            );
+            $viewBtn.show();
         }
     });
-}
-
-function insertSearchLinks(html) {
-    // add content
-    $('#related-searches').append(html);
 }

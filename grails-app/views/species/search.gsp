@@ -36,10 +36,6 @@
                 <div class="page-header__subtitle">
                     <g:message code="search.body.subTitle" />
                 </div>
-
-                <div class="page-header-links">
-                    <div id="related-searches" class="related-searches"></div>
-                </div>
             </div>
 
             <section class="search-section">
@@ -56,13 +52,21 @@
             <g:if test="${searchResults.totalRecords}">
                 <g:set var="paramsValues" value="${[:]}" />
 
-                <div class="vertical-block">
-                    <span class="fa fa-info-circle"></span>
-                    <g:message code="search.facets.refine" />
-                </div>
-
                 <div class="row">
-                    <div class="col-md-3">
+                    <%-- Refine info --%>
+                    <div class="col-sm-4 col-md-5 col-lg-3">
+                        <div class="row">
+                            <div class="col">
+                                <p>
+                                    <span class="fa fa-info-circle"></span>
+                                    <g:message code="search.facets.refine" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <%-- Refine filters --%>
+                    <div class="col-sm-4 col-md-5 col-lg-3 order-sm-2">
                         <div class="card card-body filters-container">
                             <div id="refine-options">
                                 <g:if test="${query && filterQuery}">
@@ -169,7 +173,31 @@
                         </div>
                     </div>
 
-                    <div class="col-md-9">
+                    <%-- Buttons --%>
+                    <div class="col-sm-8 col-md-7 col-lg-9">
+                        <div class="row">
+                            <div class="col">
+                                <div class="inline-controls inline-controls--right">
+                                    <div class="inline-controls__group">
+                                        <a
+                                            id="view-records-btn"
+                                            class="erk-button erk-button-link erk-button--dark"
+                                            href=""
+                                            title="${message(code: 'show.map.btn.viewRecords')}"
+                                            style="display: none;"
+                                        >
+                                            <span class="fa fa-list"></span>
+                                            <g:message code="show.map.btn.viewRecords" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <%-- Search results --%>
+                    <div class="col-sm-8 col-md-7 col-lg-9 order-sm-2">
                         <div id="search-results-panel" class="card card-body">
                             <div>
                                 <g:if test="${idxTypes.contains("TAXON")}">
