@@ -876,7 +876,14 @@ function loadPlutoFSequences(containerID, taxonID) {
             $eLink.html(entry.name);
 
             if(entry.sequence_types.length) {
-                content += $entry.find('.sequence-regions').text() + entry.sequence_types.join(', ');
+                content += $entry.find('.sequence-regions').text();
+
+                if(typeof entry.sequence_types === 'string') {  // Because plutof search doesn't return list for one element
+                    content += entry.sequence_types;
+                } else {
+                    content += entry.sequence_types.join(', ');
+                }
+
                 content += '<br />';
             }
 
