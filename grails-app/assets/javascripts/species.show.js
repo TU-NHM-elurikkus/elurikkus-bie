@@ -775,15 +775,15 @@ function loadExpertDistroMap() {
 }
 
 function toggleImageGallery(btn) {
-    var iSpan = $(btn).find("span.fa-caret-square-o-up");
+    var iSpan = $(btn).find('span.fa-caret-square-o-up');
     if(iSpan.length) {
-        iSpan.removeClass("fa-caret-square-o-up");
-        iSpan.addClass("fa-caret-square-o-down");
+        iSpan.removeClass('fa-caret-square-o-up');
+        iSpan.addClass('fa-caret-square-o-down');
         $(iSpan).parents('.image-section').find('.taxon-gallery').slideUp(400);
     } else {
-        iSpan = $(btn).find("span.fa-caret-square-o-down");
-        iSpan.removeClass("fa-caret-square-o-down");
-        iSpan.addClass("fa-caret-square-o-up");
+        iSpan = $(btn).find('span.fa-caret-square-o-down');
+        iSpan.removeClass('fa-caret-square-o-down');
+        iSpan.addClass('fa-caret-square-o-up');
         $(iSpan).parents('.image-section').find('.taxon-gallery').slideDown(400);
     }
 }
@@ -872,7 +872,14 @@ function loadPlutoFSequences(containerID, taxonID) {
 
             $entry.attr('id', 'sequence-' + $entry.attr('id'));
             $entry.removeAttr('id'); // Do not clone the ID.
-            $eLink.attr('href', 'https://plutof.ut.ee/#/sequence/view/' + entry.id);
+
+            var href;
+            if(entry.unitestatus_verif || entry.insdstatus) {
+                href = 'https://unite.ut.ee/bl_forw.php?id=' + entry.id;
+            } else {
+                href = 'https://plutof.ut.ee/#/sequence/view/' + entry.id;
+            }
+            $eLink.attr('href', href);
             $eLink.html(entry.name);
 
             if(entry.sequence_types.length) {
