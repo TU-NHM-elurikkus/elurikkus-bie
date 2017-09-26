@@ -13,7 +13,7 @@
                     class="page-header-links__link"
                 >
                     <span class="fa fa-list"></span>
-                    <g:message code="show.map.btn.viewRecords" />
+                    <g:message code="general.btn.viewRecords" />
                     <g:message code="show.records.recordCount.title" />
                 </a>
 

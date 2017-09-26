@@ -138,10 +138,10 @@
                             <a
                                 class="btn col-md-12 erk-button--dark map-button-inner"
                                 href="${recordSearchUrl}#tab-records"
-                                title="${message(code: 'show.map.btn.viewRecords')}"
+                                title="${message(code: 'general.btn.viewRecords')}"
                             >
                                 <span class="fa fa-list"></span>
-                                <g:message code="show.map.btn.viewRecords" />
+                                <g:message code="general.btn.viewRecords" />
                             </a>
                         </div>
                     </div>

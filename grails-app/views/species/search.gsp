@@ -36,6 +36,20 @@
                 <div class="page-header__subtitle">
                     <g:message code="search.body.subTitle" />
                 </div>
+
+                <div class="page-header-links">
+                    <g:each in="${kingdoms.searchResults.results}">
+                        <g:if test="${it.commonNameSingle}">
+                            <a
+                                class="page-header-links__link"
+                                href="${request.contextPath}/species/${it.linkIdentifier?:it.guid}#classification"
+                            >
+                                <span class="fa fa-sitemap"></span>
+                                <g:message code="search.header.kingodm.${it.kingdom}" />
+                            </a>
+                        </g:if>
+                    </g:each>
+                </div>
             </div>
 
             <section class="search-section">
@@ -183,11 +197,11 @@
                                             id="view-records-btn"
                                             class="erk-button erk-button-link erk-button--dark"
                                             href=""
-                                            title="${message(code: 'show.map.btn.viewRecords')}"
+                                            title="${message(code: 'general.btn.viewRecords')}"
                                             style="display: none;"
                                         >
                                             <span class="fa fa-list"></span>
-                                            <g:message code="show.map.btn.viewRecords" />
+                                            <g:message code="general.btn.viewRecords" />
                                         </a>
                                     </div>
                                 </div>
@@ -453,7 +467,7 @@
                                                 <div class="search-result__view-records">
                                                     <a href="${biocacheUrl}/occurrences/search?q=lsid:${result.guid}">
                                                         <span class="fa fa-list"></span>
-                                                        <g:message code="show.map.btn.viewRecords" />
+                                                        <g:message code="general.btn.viewRecords" />
                                                         (<g:formatNumber number="${result.occurrenceCount}" />)
                                                     </a>
                                                 </div>

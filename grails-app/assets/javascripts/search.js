@@ -169,7 +169,7 @@ function injectBiocacheResults() {
             $viewBtn.html(
                 '<span class="fa fa-list"></span>' +
                 '&nbsp;' +
-                $.i18n.prop('show.map.btn.viewRecords') + ' (' + numberWithCommas(maxItems) + ')'
+                $.i18n.prop('general.btn.viewRecords') + ' (' + numberWithCommas(maxItems) + ')'
             );
             $viewBtn.show();
         }

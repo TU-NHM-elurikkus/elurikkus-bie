@@ -618,7 +618,7 @@ function getImageFooterFromOccurrence(el) {
     var leftDetail =
         '<div class="col-sm-4 recordLink">' +
             '<a href="' + SHOW_CONF.biocacheUrl + '/occurrences/' + el.uuid + '">' +
-                '<span class="fa fa-list"></span> ' + $.i18n.prop('show.map.btn.viewRecords') +
+                '<span class="fa fa-list"></span> ' + $.i18n.prop('general.btn.viewRecords') +
             '</a>' +
             '<br />' +
             '<br />' +
