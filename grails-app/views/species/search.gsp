@@ -45,7 +45,7 @@
                                 href="${request.contextPath}/species/${it.linkIdentifier?:it.guid}#classification"
                             >
                                 <span class="fa fa-sitemap"></span>
-                                <g:message code="search.header.kingodm.${it.kingdom}" />
+                                <g:message code="search.header.kingodm.${it.kingdom}" default="${it.kingdom}" />
                             </a>
                         </g:if>
                     </g:each>
