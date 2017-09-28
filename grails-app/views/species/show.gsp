@@ -51,15 +51,15 @@
 
                     <span>
                         <g:message code="show.details.rank" />:
-                        <g:message code="taxonomy.rank.${tc.taxonConcept.rankString}" />.
+                        <g:message code="taxonomy.rank.${tc.taxonConcept.rankString}" default="${tc.taxonConcept.rankString}" />.
                     </span>
 
                     <g:if test="${tc.taxonConcept.taxonomicStatus}">
                         <span
                             class="inline-head taxonomic-status"
-                            title="${message(code: 'taxonomicStatus.' + tc.taxonConcept.taxonomicStatus + '.detail')}"
+                            title="${message(code: 'taxonomicStatus.' + tc.taxonConcept.taxonomicStatus + '.detail', default: tc.taxonConcept.taxonomicStatus)}"
                         >
-                            <g:message code="taxonomicStatus.${tc.taxonConcept.taxonomicStatus}" />
+                            <g:message code="taxonomicStatus.${tc.taxonConcept.taxonomicStatus}" default="${tc.taxonConcept.taxonomicStatus}" />
                         </span>
                     </g:if>
                 </div>
@@ -145,13 +145,15 @@
                         <section class="tab-pane" id="indigenous-info" roles="tabpanel"></section>
                     </div>
                 </div>
-            </div><!-- end main-content -->
+            </div>  <%-- end main-content --%>
         </div>
 
-        <!-- description template -->
+        <%-- description template --%>
         <div id="descriptionTemplate" class="card detached-card panel-description" style="display:none;">
             <div class="card-header">
-                <h3 class="title"></h3>
+                <h3 class="title">
+                    <g:message code="show.overview.field.description" />
+                </h3>
             </div>
 
             <div class="card-body">
@@ -176,7 +178,7 @@
             </div>
         </div>
 
-        <!-- indigenous-profile-summary template -->
+        <%-- indigenous-profile-summary template --%>
         <div id="indigenous-profile-summary-template" class="hidden-node padding-bottom-2">
             <div class="indigenous-profile-summary row">
                 <div class="col-md-2">

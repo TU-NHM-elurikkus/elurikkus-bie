@@ -11,6 +11,9 @@ function showSpeciesPage() {
     loadDataProviders();
 
     loadReferences('plutof-references', SHOW_CONF.guid);
+
+    var langID = (SHOW_CONF.locale == 'et' ? 126 : 123);
+    loadPlutoFTaxonDescription(SHOW_CONF.guid, langID);
 }
 
 function loadSpeciesLists() {
@@ -247,7 +250,9 @@ function loadExternalSources() {
                     var $description = $('#descriptionTemplate').clone();
                     $description.css({ 'display': 'block' });
                     $description.attr('id', dataObject.id);
-                    $description.find('.title').html(dataObject.title ? dataObject.title : 'Description');
+                    if(dataObject.title) {
+                        $description.find('.title').html(dataObject.title);
+                    }
 
                     var descriptionDom = $.parseHTML(dataObject.description);
                     var body = $(descriptionDom).find('#bodyContent > p:lt(2)').html(); // for really long EOL blocks
@@ -987,4 +992,48 @@ function loadPlutoFSearchResults(endpoint, params, updateCount, showPage) {
     }
 
     return loadPage;
+}
+
+function loadPlutoFTaxonDescription(taxonID, languageID) {
+    var endpoint = '/bie-hub/proxy/plutof/public/taxa/descriptions/';
+    var params = {
+        page_size: 10,
+        taxon_node: taxonID,
+        include: 'owner',
+        language: (languageID ? languageID : 123)  // 123 == eng, 126 == est
+    };
+
+    $.getJSON(endpoint, params, function(data) {
+        var excludedFields = ['created_at', 'updated_at', 'taxon_name'];
+        $.each(data.data, function(_index, desObj) {
+            var $description = $('#descriptionTemplate').clone();
+            var owner = desObj.relationships.owner.data;
+
+            $description.attr('id', 'taxon-description-' + desObj.id);
+
+            var content = '';
+            $.each(desObj.attributes, function(key, value){
+                if(value && excludedFields.indexOf(key) === -1) {
+                    // content += '<b>' + key + ':</b> ' + value + '<br />';
+                    content += '<p>' + value + '</p>';
+                }
+            });
+            $description.find('.content').html(content);
+            $description.find('.sourceText').html(
+                '<a target="_blank" href="https://plutof.ut.ee/#/taxon-description/view/' + desObj.id + '">' +
+                    'https://plutof.ut.ee/#/taxon-description/view/' + desObj.id +
+                '</a>'
+            );
+            owner = data.included.find(function(includeObj) {
+                return owner.id === includeObj.id && owner.type === includeObj.type
+            });
+            $description.find('.rightsText').html(owner.attributes.full_name);
+
+            $description.find('.providedBy').html($.i18n.prop('show.overview.field.providedBy.plutof'));
+            $description.find('.providedBy').attr('href', 'https://plutof.ut.ee/');
+
+            $description.appendTo('#descriptiveContent');
+            $description.show();
+        });
+    });
 }
