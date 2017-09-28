@@ -160,10 +160,7 @@
                         <strong>
                             <span class="datasetCount">0</span>
                         </strong>
-                        <g:message
-                            code="show.overview.datasets.summary"
-                            args="${[tc.taxonConcept.rankString]}"
-                        />
+                        <g:message code="show.overview.datasets.summary" />
                     </p>
 
                     <p>
