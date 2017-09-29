@@ -76,49 +76,49 @@
                 <div class="taxon-tabs">
                     <ul class="nav nav-tabs tab-links">
                         <li class="nav-item">
-                            <a href="#overview" data-toggle="tab" class="nav-link active" role="tab">
+                            <a href="#tab-overview" data-toggle="tab" class="nav-link active" role="tab">
                                 <g:message code="show.overview.title" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#gallery" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-gallery" data-toggle="tab" class="nav-link" role="tab">
                                 <g:message code="show.gallery.title" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#names" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-names" data-toggle="tab" class="nav-link" role="tab">
                                 <g:message code="show.names.label" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#classification" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-classification" data-toggle="tab" class="nav-link" role="tab">
                                 <g:message code="show.classification.title" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#records" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-records" data-toggle="tab" class="nav-link" role="tab">
                                 <g:message code="show.records.title" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#literature" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-literature" data-toggle="tab" class="nav-link" role="tab">
                                 <g:message code="show.literature.label" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#sequences" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-sequences" data-toggle="tab" class="nav-link" role="tab">
                                 <g:message code="show.sequences.title" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#data-partners" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-data-partners" data-toggle="tab" class="nav-link" role="tab">
                                 <g:message code="show.datasets.title" />
                             </a>
                         </li>
@@ -435,7 +435,7 @@
                 showSpeciesPage();
 
                 $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-                    var target = $(e.target).attr('href');
+                    var target = $(e.target).attr('href').replace('tab-', '');
 
                     if(window.history) {
                         window.history.replaceState({}, '', target);
@@ -461,7 +461,7 @@
                 });
 
                 if(window.location.hash) {
-                    openTab(window.location.hash);
+                    openTab(window.location.hash.replace('#', '#tab-'));
                 }
             });
         </g:javascript>

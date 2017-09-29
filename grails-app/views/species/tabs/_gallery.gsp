@@ -1,4 +1,4 @@
-<section class="tab-pane" id="gallery" role="tabpanel">
+<section class="tab-pane" id="tab-gallery" role="tabpanel">
     <g:each in="${["type", "specimen", "other", "uncertain"]}" var="cat">
         <div id="cat_${cat}" class="hidden-node image-section">
             <h3>

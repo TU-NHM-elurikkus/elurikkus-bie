@@ -1,4 +1,4 @@
-<section class="tab-pane" id="classification" role="tabpanel">
+<section class="tab-pane" id="tab-classification" role="tabpanel">
     <h3>
         <g:if test="${grailsApplication.config.classificationSupplier}">
             <g:message

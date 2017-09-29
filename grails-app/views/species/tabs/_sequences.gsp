@@ -1,4 +1,4 @@
-<section class="tab-pane" id="sequences" role="tabpanel">
+<section class="tab-pane" id="tab-sequences" role="tabpanel">
     <div id="sequences-plutof">
         <h3>
             <g:message code="show.sequences.subtitle" />

@@ -1,4 +1,4 @@
-<section class="tab-pane active" id="overview" role="tabpanel">
+<section class="tab-pane active" id="tab-overview" role="tabpanel">
     <div class="row taxon-row">
         <div class="col-md-5">
             <div class="taxon-summary-gallery hidden-node">

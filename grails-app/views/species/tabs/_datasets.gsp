@@ -1,4 +1,4 @@
-<section class="tab-pane" id="data-partners" role="tabpanel">
+<section class="tab-pane" id="tab-data-partners" role="tabpanel">
     <div class="table-responsive">
         <table id="data-providers-list" class="table name-table">
             <thead>

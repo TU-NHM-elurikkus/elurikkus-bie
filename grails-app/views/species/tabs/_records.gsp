@@ -1,4 +1,4 @@
-<section class="tab-pane" id="records" role="tabpanel">
+<section class="tab-pane" id="tab-records" role="tabpanel">
     <div id="occurrenceRecords">
         <div id="recordBreakdowns">
             <h3>
