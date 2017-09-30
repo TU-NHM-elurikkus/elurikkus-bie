@@ -283,23 +283,6 @@ function loadExternalSources() {
                 }
             });
         }
-
-        if(data.references) {
-            var $eolReferences = $('#eol-references');
-
-            data.references.forEach(function(reference) {
-                var liDom = $(
-                    '<li class="plutof-references__item">' +
-                        reference +
-                    '</li>'
-                );
-                liDom.find('a').attr('target', '_blank');
-
-                $eolReferences.append(liDom);
-            });
-
-            $eolReferences.show();
-        }
     });
 
     loadPlutoFSequences('sequences-plutof', SHOW_CONF.guid);
