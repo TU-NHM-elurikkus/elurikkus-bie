@@ -1,6 +1,6 @@
 <section class="tab-pane active" id="tab-overview" role="tabpanel">
     <div class="row taxon-row">
-        <div class="col-md-5">
+        <div class="col-12 col-md-5">
 
             <%-- Gallery --%>
             <div class="taxon-summary-gallery hidden-node">
@@ -91,7 +91,7 @@
             </div>
         </div>
 
-        <div class="col-md-7">
+        <div class="col">
             <div id="expertDistroDiv" style="display:none;margin-bottom: 20px;">
                 <h3>
                     <g:message code="show.map.distroMap.title" />
