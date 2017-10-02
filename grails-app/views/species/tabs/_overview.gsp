@@ -133,7 +133,7 @@
                         <div class="col-md-6 map-button-outer">
                             <a
                                 class="btn col-md-12 erk-button--dark map-button-inner"
-                                href="${recordSearchUrl}#tab-map"
+                                href="${recordSearchUrl}#map"
                                 title="${message(code: 'show.overview.map.btn.viewMap')}"
                             >
                                 <span class="fa fa-map-o" aria-hidden="true"></span>
@@ -143,7 +143,7 @@
                         <div class="col-md-6 map-button-outer">
                             <a
                                 class="btn col-md-12 erk-button--dark map-button-inner"
-                                href="${recordSearchUrl}#tab-records"
+                                href="${recordSearchUrl}#records"
                                 title="${message(code: 'general.btn.viewRecords')}"
                             >
                                 <span class="fa fa-list" aria-hidden="true"></span>

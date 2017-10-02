@@ -9,7 +9,7 @@
             <%-- This is not page header but we can use its classes to lay out links in the same way. --%>
             <div class="page-header-links">
                 <a
-                    href="${biocacheUrl}/occurrences/search?q=lsid:${tc?.taxonConcept?.guid ?: ''}#tab-records"
+                    href="${biocacheUrl}/occurrences/search?q=lsid:${tc?.taxonConcept?.guid ?: ''}#records"
                     class="page-header-links__link"
                 >
                     <span class="fa fa-list"></span>
@@ -18,7 +18,7 @@
                 </a>
 
                 <a
-                    href="${biocacheUrl}/occurrences/search?q=lsid:${tc?.taxonConcept?.guid ?: ''}#tab-map"
+                    href="${biocacheUrl}/occurrences/search?q=lsid:${tc?.taxonConcept?.guid ?: ''}#map"
                     class="page-header-links__link"
                 >
                     <span class="fa fa-map-o" aria-hidden="true"></span>
