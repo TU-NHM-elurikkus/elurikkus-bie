@@ -91,6 +91,38 @@
             </tbody>
         </table>
 
+        <g:if test="${!acceptedName}">
+            <table class="table name-table">
+                <thead>
+                    <th>
+                        <g:message code="show.names.field.acceptedName" />
+                    </th>
+
+                    <th>
+                        <g:message code="show.names.field.source" />
+                    </th>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="${request.contextPath}/species/${tc.taxonConcept.acceptedConceptID}">
+                                ${tc.taxonConcept.acceptedConceptName}
+                            </a>
+                        </td>
+
+                        <td class="source">
+                            <ul>
+                                <li>
+                                    ${tc.taxonConcept.nameAuthority ?: tc.taxonConcept.infoSourceName}
+                                </li>
+                            </ul>
+                            </td>
+                    </tr>
+                </tbody>
+            </table>
+        </g:if>
+
         <g:if test="${tc.synonyms}">
             <table class="table name-table">
                 <thead>
@@ -119,14 +151,16 @@
                                     />
                                 </g:set>
 
-                                <g:if test="${synonym.infoSourceURL && synonym.infoSourceURL != synonym.datasetURL}">
-                                    <a href="${synonym.infoSourceURL}" target="_blank" class="external">
+                                <a href="${request.contextPath}/species/${synonym.nameGuid}">
+                                    <g:if test="${synonym.infoSourceURL && synonym.infoSourceURL != synonym.datasetURL}">
+                                        <a href="${synonym.infoSourceURL}" target="_blank" class="external">
+                                            ${raw(synonymNameFormatted)}
+                                        </a>
+                                    </g:if>
+                                    <g:else>
                                         ${raw(synonymNameFormatted)}
-                                    </a>
-                                </g:if>
-                                <g:else>
-                                    ${raw(synonymNameFormatted)}
-                                </g:else>
+                                    </g:else>
+                                </a>
                             </td>
 
                             <td class="source">
