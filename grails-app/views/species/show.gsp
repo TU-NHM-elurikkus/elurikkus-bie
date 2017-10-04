@@ -118,7 +118,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#tab-data-partners" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-datasets" data-toggle="tab" class="nav-link" role="tab">
                                 <g:message code="show.datasets.title" />
                             </a>
                         </li>

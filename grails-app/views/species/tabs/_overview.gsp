@@ -25,7 +25,7 @@
                             class="more-photos tab-link"
                             href="#gallery"
                             title="${message(code: 'show.overview.showMore')}"
-                            onclick="openTab('#gallery')"
+                            onclick="openTab('#tab-gallery')"
                         >
                            <span>
                                +
@@ -170,7 +170,7 @@
                     </p>
 
                     <p>
-                        <a class="tab-link" href="#data-partners" onclick="openTab('#data-partners')">
+                        <a class="tab-link" href="#datasets" onclick="openTab('#tab-datasets')">
                             <g:message code="show.overview.datasets.desc.01" />
                         </a>
                         <g:message code="show.overview.datasets.desc.02" />
