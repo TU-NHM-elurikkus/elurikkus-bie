@@ -5,4 +5,6 @@
     simpleName="${false}"
 />
 
-(${taxon.occurrenceCount})
+<g:if test="${taxon.occurrenceCount}">
+    (${taxon.occurrenceCount})
+</g:if>
