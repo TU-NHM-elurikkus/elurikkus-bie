@@ -54,14 +54,17 @@
                         <g:message code="taxonomy.rank.${tc.taxonConcept.rankString}" default="${tc.taxonConcept.rankString}" />.
                     </span>
 
-                    <g:if test="${tc.taxonConcept.taxonomicStatus}">
-                        <span
-                            class="inline-head taxonomic-status"
-                            title="${message(code: 'taxonomicStatus.' + tc.taxonConcept.taxonomicStatus + '.detail', default: tc.taxonConcept.taxonomicStatus)}"
-                        >
-                            <g:message code="taxonomicStatus.${tc.taxonConcept.taxonomicStatus}" default="${tc.taxonConcept.taxonomicStatus}" />
+                    <g:set var="taxonStatus" value="${tc.taxonConcept.taxonomicStatus}" />
+                    <g:if test="${taxonStatus}">
+                        <span title="${message(code: 'taxonomicStatus.' + taxonStatus + '.detail')}">
+                            <g:message code="taxonomicStatus.${taxonStatus}" default="${taxonStatus}" />.
                         </span>
                     </g:if>
+
+                    <span>
+                        <g:message code="taxonomicStatus.nameAuthority" />:
+                        ${tc?.taxonConcept.nameAuthority}
+                    </span>
                 </div>
 
                 <div class="page-header-links">
