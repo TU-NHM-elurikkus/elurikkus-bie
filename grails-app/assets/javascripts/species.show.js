@@ -12,53 +12,33 @@ function showSpeciesPage() {
 
     loadReferences('plutof-references', SHOW_CONF.guid);
 
-    var langID = (SHOW_CONF.locale == 'et' ? 126 : 123);
+    var langID = (SHOW_CONF.locale === 'et' ? 126 : 123);
     loadPlutoFTaxonDescription(SHOW_CONF.guid, langID);
 }
 
 function loadSpeciesLists() {
     $.getJSON(SHOW_CONF.speciesListUrl + '/ws/species/' + SHOW_CONF.guid + '?callback=?', function(data) {
         if(data) {
-            var maxListFields = 10;
-            data.forEach(function(specieslist) {
-                var $description = $('#descriptionTemplate').clone();
+            var $listPanel = $('#descriptionTemplate').clone();
+            var $listContent = $('<ul>');
 
-                $description.attr('id', '#specieslist-block-' + specieslist.dataResourceUid);
-                $description.addClass('species-list-block');
-                $description.find('.title').html(specieslist.list.listName);
+            $listPanel.attr('id', '#specieslist-block');
+            $listPanel.find('.title').html($.i18n.prop('menu.lists.label'));
+            $listPanel.find('.card-footer').remove();
 
-                if(specieslist.kvpValues.length > 0) {
-                    var content = '<table class="table">';
-
-                    $.each(specieslist.kvpValues, function(idx, kvpValue) {
-                        if(idx >= maxListFields) {
-                            return false;
-                        }
-
-                        var value = kvpValue.value;
-
-                        if(kvpValue.vocabValue) {
-                            value = kvpValue.vocabValue;
-                        }
-
-                        content += '<tr><td>' + (kvpValue.key + '</td><td>' + value + '</td></tr>');
-                    });
-
-                    content += '</table>';
-                    $description.find('.content').html(content);
-                } else {
-                    $description.find('.content').html($.i18n.prop('show.list.defaultText', specieslist.list.listName));
-                }
-
-                $description.find('.source').css({ 'display': 'none' });
-                $description.find('.rights').css({ 'display': 'none' });
-
-                $description.find('.providedBy').attr('href', SHOW_CONF.speciesListUrl + '/speciesListItem/list/' + specieslist.dataResourceUid);
-                $description.find('.providedBy').html('<span class="fa fa-check-circle"></span> ' + specieslist.list.listName);
-
-                $description.appendTo('#listContent');
-                $description.show();
+            data.forEach(function(speciesList) {
+                $listContent.append(
+                    '<li>' +
+                        '<a href="' + SHOW_CONF.speciesListUrl + '/speciesListItem/list/' + speciesList.dataResourceUid + '">' +
+                            '<span class="fa fa-tags"></span> ' +
+                            speciesList.list.listName +
+                        '</a>' +
+                    '</li>'
+                );
             });
+            $listPanel.find('.content').html($listContent);
+            $listPanel.appendTo('#listContent');
+            $listPanel.show();
         }
     });
 }
@@ -142,7 +122,7 @@ function fitMapToBounds() {
         }
 
         // If query has no mapped results, /mapping/bounds returns [0, 0, 0, 0]
-        if(data.every(function(coord) { return coord === 0 })) {
+        if(data.every(function(coord) { return coord === 0; })) {
             return;
         }
 
@@ -1010,7 +990,7 @@ function loadPlutoFTaxonDescription(taxonID, languageID) {
             $description.attr('id', 'taxon-description-' + desObj.id);
 
             var content = '';
-            $.each(desObj.attributes, function(key, value){
+            $.each(desObj.attributes, function(key, value) {
                 if(value && excludedFields.indexOf(key) === -1) {
                     // content += '<b>' + key + ':</b> ' + value + '<br />';
                     content += '<p>' + value + '</p>';
@@ -1023,7 +1003,7 @@ function loadPlutoFTaxonDescription(taxonID, languageID) {
                 '</a>'
             );
             owner = data.included.find(function(includeObj) {
-                return owner.id === includeObj.id && owner.type === includeObj.type
+                return owner.id === includeObj.id && owner.type === includeObj.type;
             });
             $description.find('.rightsText').html(owner.attributes.full_name);
 
