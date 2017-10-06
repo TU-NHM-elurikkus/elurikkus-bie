@@ -156,7 +156,7 @@
                                                                 <span class="fa fa-square-o"></span>
 
                                                                 <g:if test="${facetResult.fieldName == 'rank'}">
-                                                                    <g:message code="taxonomy.rank.${fieldResult.label}" />
+                                                                    <g:message code="taxonomy.rank.${fieldResult.label.replace(' ', '')}" />
                                                                 </g:if>
                                                                 <g:else>
                                                                     <g:message code="${facetResult.fieldName}.${fieldResult.label}" default="${fieldResult.label?:"[unknown]"}" />
