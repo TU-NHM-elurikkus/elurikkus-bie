@@ -3,18 +3,22 @@ grails.project.groupId = "au.org.ala" // change this to alter the default packag
 grails.appName = "${appName}"
 
 default_config = "/data/${appName}/config/${appName}-config.properties"
+commons_config = "/data/commons/config/commons-config.properties"
+
 if(!grails.config.locations || !(grails.config.locations instanceof List)) {
     grails.config.locations = []
 }
-if (new File(default_config).exists()) {
-    println "[${appName}] Including default configuration file: " + default_config;
-    grails.config.locations.add "file:" + default_config
-} else {
-    println "[${appName}] No external configuration file defined."
+
+if (!new File(default_config).exists()) {
+    throw ApplicationException("Config doesn't exist: " + default_config)
+} else if(!new File(commons_config).exists()) {
+    throw ApplicationException("Config doesn't exist: " + commons_config)
 }
 
+grails.config.locations.add "file:" + default_config
+grails.config.locations.add "file:" + commons_config
+
 println "[${appName}] (*) grails.config.locations = ${grails.config.locations}"
-println "default_config = ${default_config}"
 
 skin.layout = "generic"
 
@@ -26,7 +30,7 @@ grails.mime.types = [ // the first one is the default format
     css:           'text/css',
     csv:           'text/csv',
     form:          'application/x-www-form-urlencoded',
-    html:          ['text/html','application/xhtml+xml'],
+    html:          ['text/html', 'application/xhtml+xml'],
     js:            'text/javascript',
     json:          ['application/json', 'text/json'],
     multipartForm: 'multipart/form-data',

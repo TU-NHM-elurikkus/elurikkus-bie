@@ -147,8 +147,8 @@ function fitMapToBounds() {
 function loadDataProviders() {
 
     var url = SHOW_CONF.biocacheServiceUrl +
-        '/occurrences/search.json?q=lsid:' +
-        SHOW_CONF.guid +
+        '/occurrences/search.json?' +
+        'q=lsid:' + SHOW_CONF.guid +
         '&pageSize=0&flimit=-1';
 
     if(SHOW_CONF.mapQueryContext) {
