@@ -92,6 +92,7 @@
         </div>
 
         <div class="col">
+            <%--
             <div id="expertDistroDiv" style="display:none;margin-bottom: 20px;">
                 <h3>
                     <g:message code="show.map.distroMap.title" />
@@ -114,6 +115,7 @@
                     </span>
                 </p>
             </div>
+            --%>
 
             <div class="taxon-map">
                 <h3>

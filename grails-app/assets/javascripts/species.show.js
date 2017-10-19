@@ -5,7 +5,7 @@ function showSpeciesPage() {
     loadOverviewImages();
     loadMap();
     loadGalleries();
-    loadExpertDistroMap();
+    // loadExpertDistroMap();
     loadSpeciesLists();
     loadDataProviders();
     loadExternalSources();
