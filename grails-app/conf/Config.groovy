@@ -1,25 +1,27 @@
-grails.project.groupId = "au.org.ala" // change this to alter the default package name and Maven publishing destination
+import grails.util.Environment
 
-grails.appName = "${appName}"
+
+grails.project.groupId = "au.org.ala" // change this to alter the default package name and Maven publishing destination
 
 default_config = "/data/${appName}/config/${appName}-config.properties"
 commons_config = "/data/commons/config/commons-config.properties"
+env_config = "conf/${Environment.current.name}/Config.groovy"
 
-if(!grails.config.locations || !(grails.config.locations instanceof List)) {
-    grails.config.locations = []
+grails.config.locations = [
+    "file:${env_config}",
+    "file:${default_config}",
+    "file:${commons_config}"
+]
+
+if(!new File(env_config).exists()) {
+    println "ERROR - [${appName}] Couldn't find environment specific configuration file: ${env_config}"
 }
-
-// Build server doesn't see config files for some reason
-if (!new File(default_config).exists()) {
-    // throw ApplicationException("Config doesn't exist: " + default_config)
-    println "[${appName}] No external configuration file defined."
-} else if(!new File(commons_config).exists()) {
-    // throw ApplicationException("Config doesn't exist: " + commons_config)
-    println "[${appName}] No external commons configuration file defined."
+if(!new File(default_config).exists()) {
+    println "ERROR - [${appName}] No external configuration file defined. ${default_config}"
 }
-
-grails.config.locations.add "file:" + default_config
-grails.config.locations.add "file:" + commons_config
+if(!new File(commons_config).exists()) {
+    println "ERROR - [${appName}] No external commons configuration file defined. ${commons_config}"
+}
 
 println "[${appName}] (*) grails.config.locations = ${grails.config.locations}"
 
