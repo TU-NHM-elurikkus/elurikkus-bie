@@ -99,23 +99,57 @@ grails.hibernate.pass.readonly = false
 // configure passing read-only to OSIV session by default, requires "singleSession = false" OSIV mode
 grails.hibernate.osiv.readonly = false
 
+
 environments {
     development {
         grails.logging.jul.usebridge = true
     }
     production {
         grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
 
-// log4j configuration
-log4j.main = {
-    // Example of changing the log pattern for the default console appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+
+def logging_dir = System.getProperty("catalina.base") ? System.getProperty("catalina.base") + "/logs" : "/var/log/tomcat7"
+if(!new File(logging_dir).exists()) {
+    logging_dir = "/tmp"
+}
+
+log4j = {
+
+    def logPattern = pattern(conversionPattern: "%d %-5p [%c{1}] %m%n")
+
+    appenders {
+        environments {
+            production {
+                rollingFile(
+                    name: "tomcatLog",
+                    maxFileSize: "10MB",
+                    file: "${logging_dir}/bie-hub.log",
+                    threshold: org.apache.log4j.Level.WARN,
+                    layout: logPattern)
+            }
+            test {
+                rollingFile(
+                    name: "tomcatLog",
+                    maxFileSize: "10MB",
+                    file: "${logging_dir}/bie-hub.log",
+                    threshold: org.apache.log4j.Level.WARN,
+                    layout: logPattern)
+            }
+            development {
+                console(
+                    name: "stdout",
+                    layout: logPattern,
+                    threshold: org.apache.log4j.Level.DEBUG)
+            }
+        }
+    }
+
+    root {
+        error "tomcatLog"
+        warn "tomcatLog"
+    }
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
