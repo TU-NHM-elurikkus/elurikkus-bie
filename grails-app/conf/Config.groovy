@@ -15,7 +15,7 @@ grails.config.locations = [
 ]
 
 def prop = new Properties()
-def rollbarServerKey
+def rollbarServerKey = ""
 
 // Load rollbar key from commons config file.
 try {
