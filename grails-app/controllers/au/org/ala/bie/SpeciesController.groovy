@@ -79,7 +79,7 @@ class SpeciesController {
         }
 
         if (searchResults instanceof JSONObject && searchResults.has("error")) {
-            log.error "Error requesting taxon concept object: " + searchResults.error
+            log.error "TaxonConcept get Error: ${searchResults.error} | params: ${params} | ${searchResults.error}"
             render(view: '../error', model: [message: searchResults.error])
         } else {
             render(view: 'search', model: [
@@ -112,16 +112,16 @@ class SpeciesController {
         def taxonDetails = bieService.getTaxonConcept(guid)
 
         if (!taxonDetails) {
-            log.error "Error requesting taxon concept object: " + guid
+            log.error "TaxonConcept Not Found: ${guid} | params: ${params}"
             response.status = 404
             render(view: '../error', model: [message: "Requested taxon <b>" + guid + "</b> was not found"])
         } else if (taxonDetails instanceof JSONObject && taxonDetails.has("error")) {
             if (taxonDetails.error?.contains("FileNotFoundException")) {
-                log.error "Error requesting taxon concept object: " + guid
+                log.error "TaxonConcept FileNotFoundException: ${guid} | params: ${params} | ${taxonDetails.error}"
                 response.status = 404
                 render(view: '../error', model: [message: "Requested taxon <b>" + guid + "</b> was not found"])
             } else {
-                log.error "Error requesting taxon concept object: " + taxonDetails.error
+                log.error "TaxonConcept get Error: ${guid} | params: ${params} | ${taxonDetails.error}"
                 render(view: '../error', model: [message: taxonDetails.error])
             }
         } else if (taxonDetails.taxonConcept?.guid && taxonDetails.taxonConcept.guid != guid) {
