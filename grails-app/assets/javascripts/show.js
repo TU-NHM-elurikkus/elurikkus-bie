@@ -222,9 +222,7 @@ function loadDataProviders() {
 
 function loadExternalSources() {
     // load EOL content
-    $.ajax({
-        url: SHOW_CONF.eolUrl,
-    }).done(function(data) {
+    $.ajax({ url: SHOW_CONF.eolUrl }).done(function(data) {
         // clone a description template...
         if(data.dataObjects) {
             $.each(data.dataObjects, function(idx, dataObject) {
