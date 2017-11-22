@@ -1,4 +1,4 @@
-<section class="tab-pane" id="tab-names" rol="tabpanel">
+<section class="tab-pane" id="tab-names" role="tabpanel">
     <g:set var="acceptedName" value="${tc.taxonConcept.taxonomicStatus == 'accepted'}" />
 
     <h3>

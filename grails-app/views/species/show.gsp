@@ -26,7 +26,6 @@
 <html lang="en">
     <head>
         <meta name="layout" content="${grailsApplication.config.skin.layout}" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>
@@ -81,49 +80,49 @@
                 <div class="taxon-tabs">
                     <ul class="nav nav-tabs tab-links">
                         <li class="nav-item">
-                            <a href="#tab-overview" data-toggle="tab" class="nav-link active" role="tab">
+                            <a href="#tab-overview" data-toggle="tab" class="nav-link active">
                                 <g:message code="show.overview.title" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#tab-gallery" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-gallery" data-toggle="tab" class="nav-link">
                                 <g:message code="show.gallery.title" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#tab-names" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-names" data-toggle="tab" class="nav-link">
                                 <g:message code="show.names.label" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#tab-classification" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-classification" data-toggle="tab" class="nav-link">
                                 <g:message code="show.classification.title" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#tab-records" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-records" data-toggle="tab" class="nav-link">
                                 <g:message code="show.records.title" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#tab-literature" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-literature" data-toggle="tab" class="nav-link">
                                 <g:message code="show.literature.label" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#tab-sequences" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-sequences" data-toggle="tab" class="nav-link">
                                 <g:message code="show.sequences.title" />
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#tab-datasets" data-toggle="tab" class="nav-link" role="tab">
+                            <a href="#tab-datasets" data-toggle="tab" class="nav-link">
                                 <g:message code="show.datasets.title" />
                             </a>
                         </li>
@@ -147,7 +146,7 @@
 
                         <g:render template="tabs/datasets" />
 
-                        <section class="tab-pane" id="indigenous-info" roles="tabpanel"></section>
+                        <section class="tab-pane" id="indigenous-info" role="tabpanel"></section>
                     </div>
                 </div>
             </div>  <%-- end main-content --%>

@@ -55,7 +55,7 @@
                 </div>
             </div>
 
-            <section class="search-section">
+            <div class="search-section">
                 <g:render template="searchBox" />
                 <p>
                     <g:message code="search.results.overview" args="${[searchQuery, formatNumber(number: searchResults.totalRecords)] }" />
@@ -64,7 +64,7 @@
                 <g:if test="${facetMap}">
                     <g:render template="activeFilters" />
                 </g:if>
-            </section>
+            </div>
 
             <g:if test="${searchResults.totalRecords}">
                 <g:set var="paramsValues" value="${[:]}" />
@@ -221,14 +221,12 @@
 
                                     <%-- XXX XXX XXX --%>
                                     <a
-                                        class="download-button float-left"
+                                        class="erk-button erk-button--light erk-button-link float-left"
                                         href="${downloadUrl}"
                                         title="${message(code: 'search.download.link.title')}"
                                     >
-                                        <button class="erk-button erk-button--light">
-                                            <span class="fa fa-download"></span>
-                                            <g:message code="general.btn.download.label" />
-                                        </button>
+                                        <span class="fa fa-download"></span>
+                                        <g:message code="general.btn.download.label" />
                                     </a>
                                 </g:if>
 
