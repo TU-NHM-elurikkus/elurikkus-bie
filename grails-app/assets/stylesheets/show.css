@@ -116,6 +116,11 @@
     line-height: 50px;
 }
 
+.loadMore {
+    padding-top: .5rem;
+    padding-bottom: 1rem;
+}
+
 /* Taxon map */
 .taxon-map {
     margin-bottom: 20px;

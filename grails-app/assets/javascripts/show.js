@@ -549,9 +549,9 @@ function loadGalleryType(category, start) {
                 var spinnerLink = $('img#gallerySpinner').attr('src');
                 var btn =
                     '<div class="loadMore ' + category + '">' +
-                        '<br />' +
                         '<button type="button" class="erk-button erk-button--light" onCLick="loadGalleryType(\'' + category + '\',' + (start + pageSize) + ');">' +
-                            $.i18n.prop('general.btn.loadMore') + ' <img src="' + spinnerLink + '" class="hidden-node" />' +
+                            $.i18n.prop('general.btn.loadMore') +
+                            '<img src="' + spinnerLink + '" class="hidden-node" />' +
                         '</button>' +
                     '</div>';
                 $categoryTmpl.find('.taxon-gallery').append(btn);
