@@ -1,8 +1,8 @@
 /*
-*= require leaflet
-*= require ekko-lightbox-5.2.0
-*= require ala-charts
-*= require species
+ *= require leaflet-1.2.0/leaflet
+ *= require ekko-lightbox-5.2.0
+ *= require ala-charts
+ *= require species
 */
 
 .audio-player {

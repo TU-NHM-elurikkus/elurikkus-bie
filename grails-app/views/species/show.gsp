@@ -20,7 +20,7 @@
 
 <g:set var="locale" value="${org.springframework.web.servlet.support.RequestContextUtils.getLocale(request)}" />
 <g:set bean="authService" var="authService" />
-<g:set var="imageViewerType" value="${grailsApplication.config.imageViewerType?:'LEAFLET'}" />
+<g:set var="imageViewerType" value="${grailsApplication.config.imageViewerType ?: 'LEAFLET'}" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +34,8 @@
 
         <asset:stylesheet src="show.css" />
         <asset:javascript src="show.js" />
+
+        <script src="https://maps.google.com/maps/api/js?v=3.5&sensor=false&key=${grailsApplication.config.google.apikey}"></script>
     </head>
 
     <body>
@@ -396,7 +398,7 @@
                 bieUrl:             "${grailsApplication.config.bie.baseURL}",
                 alertsUrl:          "${grailsApplication.config.alerts.baseUrl}",
                 remoteUser:         "${request.remoteUser ?: ''}",
-                eolUrl:             "${raw(createLink(controller: 'externalSite', action: 'eol', params: [s: tc?.taxonConcept?.nameString ?: '', f:tc?.classification?.class?:tc?.classification?.phylum?:'']))}",
+                eolUrl:             "${raw(createLink(controller: 'externalSite', action: 'eol', params: [s: tc?.taxonConcept?.nameString ?: '', f:tc?.classification?.class ?: tc?.classification?.phylum ?: '']))}",
                 genbankUrl:         "${createLink(controller: 'externalSite', action: 'genbank', params: [s: tc?.taxonConcept?.nameString ?: ''])}",
                 scholarUrl:         "${createLink(controller: 'externalSite', action: 'scholar', params: [s: tc?.taxonConcept?.nameString ?: ''])}",
                 soundUrl:           "${createLink(controller: 'species', action: 'soundSearch', params: [s: tc?.taxonConcept?.nameString ?: ''])}",  // FixMe: do somthing so that it starts working
@@ -427,7 +429,7 @@
                 getPreferredSpeciesListUrl: "${grailsApplication.config.speciesList.baseURL}",
                 addPreferenceButton: "${authService?.getUserId() ? (authService.getUserForUserId(authService.getUserId())?.roles?.contains('ROLE_ADMIN') ? true : false) : false}",
                 mapOutline: "${grailsApplication.config.map.outline ?: 'false'}",
-                mapEnvOptions: "${grailsApplication.config.map.env?.options?:'color:' + grailsApplication.config.map.records.colour+ ';name:circle;size:4;opacity:0.8'}",
+                mapEnvOptions: "${grailsApplication.config.map.env?.options ?: 'color:' + grailsApplication.config.map.records.colour+ ';name:circle;size:4;opacity:0.8'}",
                 locale: "${locale}"
             };
 

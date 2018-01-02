@@ -1,10 +1,12 @@
-//= require leaflet
+//= require leaflet-1.2.0/leaflet-src
+//= require google-mutant
+//= require tile.stamen-v1.3.0
 //= require ala-charts
 //= require ekko-lightbox-5.2.0
 //= require moment.min
 //= require jquery.htmlClean
 
-var SHOW_CONF;  // This constant is populated by show.gsp inline javascript
+var SHOW_CONF; // This constant is populated by show.gsp inline javascript
 
 function showSpeciesPage() {
     // load content
@@ -57,15 +59,15 @@ function loadMap() {
     // add an occurrence layer for this taxon
     var taxonLayer = L.tileLayer.wms(SHOW_CONF.biocacheServiceUrl + '/mapping/wms/reflect?q=lsid:' +
         SHOW_CONF.guid + '&qc=' + SHOW_CONF.mapQueryContext, {
-            layers: 'ALA:occurrences',
-            format: 'image/png',
-            transparent: true,
-            attribution: SHOW_CONF.mapAttribution,
-            bgcolor: '0x000000',
-            outline: SHOW_CONF.mapOutline,
-            ENV: SHOW_CONF.mapEnvOptions
-        }
-    );
+        layers: 'ALA:occurrences',
+        format: 'image/png',
+        transparent: true,
+        attribution: SHOW_CONF.mapAttribution,
+        bgcolor: '0x000000',
+        outline: SHOW_CONF.mapOutline,
+        ENV: SHOW_CONF.mapEnvOptions,
+        uppercase: true
+    });
 
     var speciesLayers = new L.LayerGroup();
     taxonLayer.addTo(speciesLayers);
@@ -86,16 +88,25 @@ function loadMap() {
 
     defaultBaseLayer.addTo(SHOW_CONF.map);
 
-    var baseLayers = {
-        'Base layer': defaultBaseLayer
-    };
+    // Google map layers
+    var roadLayer = L.gridLayer.googleMutant({ type: 'roadmap' });
+    var terrainLayer = L.gridLayer.googleMutant({ type: 'terrain' });
+    var hybridLayer = L.gridLayer.googleMutant({ type: 'satellite' });
+    var blackWhiteLayer = new L.StamenTileLayer('toner');
+
+    var baseLayers = {};
+    baseLayers[$.i18n.prop('advancedsearch.js.map.layers.Minimal')] = defaultBaseLayer;
+    baseLayers[$.i18n.prop('advancedsearch.js.map.layers.Road')] = roadLayer;
+    baseLayers[$.i18n.prop('advancedsearch.js.map.layers.Terrain')] = terrainLayer;
+    baseLayers[$.i18n.prop('advancedsearch.js.map.layers.Satellite')] = hybridLayer;
+    baseLayers[$.i18n.prop('advancedsearch.js.map.layers.BlackWhite')] = blackWhiteLayer;
 
     var sciName = SHOW_CONF.scientificName;
 
     var overlays = {};
     overlays[sciName] = taxonLayer;
 
-    L.control.layers(baseLayers, overlays).addTo(SHOW_CONF.map);
+    L.control.layers(baseLayers, overlays, { collapsed: true, position: 'bottomleft' }).addTo(SHOW_CONF.map);
 
     SHOW_CONF.map.invalidateSize(false);
 
