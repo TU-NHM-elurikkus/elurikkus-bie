@@ -66,7 +66,7 @@
                     <%-- XXX Intentional unclosed tag. --%>
                     <dl>
                         <dt>
-                            <g:message code="taxonomy.rank.${taxon.rank.replaceAll('[\\W]_', '')}" default="${taxon.rank}" />
+                            <g:message code="taxonomy.rank.${taxon.rank?.replaceAll('[\\W]_', '')}" default="${taxon.rank}" />
                         </dt>
 
                         <dd>
@@ -85,7 +85,7 @@
                     <%-- XXX Intentional unclosed tag. --%>
                     <dl>
                         <dt id="currentTaxonConcept">
-                            <g:message code="taxonomy.rank.${taxon.rank.replaceAll('[\\W]_', '')}" default="${taxon.rank}" />
+                            <g:message code="taxonomy.rank.${taxon.rank?.replaceAll('[\\W]_', '')}" default="${taxon.rank}" />
                         </dt>
 
                         <dd>
@@ -102,7 +102,7 @@
             <dl class="child-taxa">
                 <g:each in="${childConcepts}" var="child" status="i">
                     <dt>
-                        <g:message code="taxonomy.rank.${child.rank.replaceAll('[\\W]_', '')}" default="${child.rank}" />
+                        <g:message code="taxonomy.rank.${child.rank?.replaceAll('[\\W]_', '')}" default="${child.rank}" />
                     </dt>
 
                     <g:set var="taxonLabel">
