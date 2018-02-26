@@ -1,5 +1,5 @@
 <section class="tab-pane" id="tab-gallery" role="tabpanel">
-    <g:each in="${["type", "specimen", "other", "uncertain"]}" var="cat">
+    <g:each in="${["observation", "specimen", "type", "other"]}" var="cat">
         <div id="cat_${cat}" class="hidden-node image-section">
             <h3>
                 <a href="javascript:void(0)" onclick="toggleImageGallery(this)" class="undecorated">

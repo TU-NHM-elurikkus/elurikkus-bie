@@ -368,10 +368,10 @@ function loadExternalSources() {
  */
 function loadGalleries() {
     $('#gallerySpinner').show();
-    loadGalleryType('type', 0);
+    loadGalleryType('observation', 0);
     loadGalleryType('specimen', 0);
+    loadGalleryType('type', 0);
     loadGalleryType('other', 0);
-    loadGalleryType('uncertain', 0);
 }
 
 var entityMap = {
@@ -415,10 +415,11 @@ function loadOverviewImages() {
         });
     }
 
-    var url = SHOW_CONF.biocacheServiceUrl +
-        '/occurrences/search.json?q=lsid:' +
-        SHOW_CONF.guid +
-        '&fq=multimedia:"Image"&fq=-assertion_user_id:*&im=true&facet=off&pageSize=5&start=0&callback=?';
+    var url = SHOW_CONF.biocacheServiceUrl + '/occurrences/search.json' +
+        '?q=lsid:' + SHOW_CONF.guid +
+        '&fq=multimedia:"Image"&im=true&facet=off&pageSize=5&start=0' +
+        '&defType=edismax&bq=basis_of_record:HumanObservation^200&dir=desc' +  // boost line
+        '&callback=?';
 
     $.getJSON(url, function(data) {
         if(data && data.totalRecords > 0) {
@@ -498,10 +499,10 @@ function generateOverviewThumb(occurrence, id) {
  */
 function loadGalleryType(category, start) {
     var imageCategoryParams = {
+        observation: '&fq=(basis_of_record:(HumanObservation OR MachineObservation) AND -type_status:*)',
+        specimen: '&fq=(basis_of_record:(PreservedSpecimen OR FossilSpecimen OR LivingSpecimen) AND -type_status:*)',
+        other: '&fq=(-basis_of_record:(HumanObservation OR MachineObservation OR PreservedSpecimen OR FossilSpecimen OR LivingSpecimen) AND -type_status:*)',
         type: '&fq=type_status:*',
-        specimen: '&fq=basis_of_record:PreservedSpecimen&fq=-type_status:*',
-        other: '&fq=-type_status:*&fq=-basis_of_record:PreservedSpecimen&fq=-identification_qualifier_s:"Uncertain"&fq=-assertion_user_id:*&sort=identification_qualifier_s&dir=asc',
-        uncertain: '&fq=-type_status:*&fq=-basis_of_record:PreservedSpecimen&fq=identification_qualifier_s:"Uncertain"'
     };
 
     var pageSize = 20;
