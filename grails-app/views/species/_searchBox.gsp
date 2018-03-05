@@ -6,7 +6,6 @@
             name="q"
             placeholder="${message(code: 'searchBox.btn.placeholder')}"
             autocomplete="off"
-            autofocus
             onfocus="this.value = this.value;"
             class="input-plus__field"
         />

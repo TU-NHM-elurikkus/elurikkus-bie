@@ -159,10 +159,10 @@
                                                                 <span class="fa fa-square-o"></span>
 
                                                                 <g:if test="${facetResult.fieldName == 'rank'}">
-                                                                    <g:message code="taxonomy.rank.${fieldResult.label.replace(' ', '')}" />
+                                                                    <g:message code="taxonomy.rank.${bie.formatI18nKey(value: fieldResult.label)}" />
                                                                 </g:if>
                                                                 <g:else>
-                                                                    <g:message code="${facetResult.fieldName}.${fieldResult.label}" default="${fieldResult.label?:"[unknown]"}" />
+                                                                    <g:message code="${facetResult.fieldName}.${bie.formatI18nKey(value: fieldResult.label)}" default="${fieldResult.label?:"[unknown]"}" />
                                                                 </g:else>
 
                                                                 (<g:formatNumber number="${fieldResult.count}" />)

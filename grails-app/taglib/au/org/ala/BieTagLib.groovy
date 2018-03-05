@@ -275,4 +275,33 @@ class BieTagLib {
     def static escapeJS(String value) {
         return StringEscapeUtils.escapeJavaScript(value);
     }
+
+    /**
+     * Trim surrounding quotes from a string
+     *
+     * @param value
+     * @return
+     */
+    def trimQuotes = { attrs ->
+        def value = attrs.value
+        def startsWith = value.startsWith("\"")
+        def endsWith = value.endsWith("\"")
+
+        if(startsWith && endsWith) {
+            out << value.substring(1, value.length() - 1)
+        } else {
+            out << value
+        }
+    }
+
+    /**
+     * Format facet translation key from its label value
+     *
+     * @param value
+     * @return
+     */
+    def formatI18nKey = { attrs ->
+        // Trim quotation marks, whitespace around and within.
+        out << trimQuotes(["value": attrs.value]).replace(" ", "")
+    }
 }
