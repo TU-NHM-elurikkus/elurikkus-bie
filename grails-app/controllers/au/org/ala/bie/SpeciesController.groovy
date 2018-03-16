@@ -15,7 +15,6 @@ class SpeciesController {
     def utilityService
     def biocacheService
     def grailsApplication
-    def authService
 
     def geoSearch = {
 
@@ -63,9 +62,6 @@ class SpeciesController {
         def requestObj = new SearchRequestParamsDTO(query, filterQuery, startIndex, rows, sortField, sortDirection)
         def searchResults = bieService.searchBie(requestObj)
 
-        def kingdomRequest = new SearchRequestParamsDTO("rank:kingdom", null, 0, 10, "scientificName", "asc")
-        def kingdoms = bieService.searchBie(kingdomRequest)
-
         // empty search -> search for all records
         if (query.isEmpty()) {
             //render(view: "../error", model: [message: "No search term specified"])
@@ -87,7 +83,6 @@ class SpeciesController {
         } else {
             render(view: "search", model: [
                 searchResults: searchResults?.searchResults,
-                kingdoms: kingdoms,
                 facetMap: utilityService.addFacetMap(filterQuery),
                 query: query?.trim(),
                 filterQuery: filterQuery,
@@ -138,7 +133,7 @@ class SpeciesController {
                     sortCommonNameSources: utilityService.getNamesAsSortedMap(taxonDetails.commonNames),
                     taxonHierarchy: bieService.getClassificationForGuid(taxonDetails.taxonConcept.guid),
                     childConcepts: bieService.getChildConceptsForGuid(taxonDetails.taxonConcept.guid),
-                    speciesList: bieService.getSpeciesList(taxonDetails.taxonConcept?.guid?:guid)
+                    speciesList: bieService.getSpeciesList(taxonDetails.taxonConcept?.guid ?: guid)
             ])
         }
     }
@@ -149,7 +144,7 @@ class SpeciesController {
      */
     def imageSearch = {
         def model = [:]
-        if(params.id){
+        if(params.id) {
             def taxon = bieService.getTaxonConcept(params.id)
             model["taxonConcept"] = taxon
         }
@@ -165,16 +160,5 @@ class SpeciesController {
         render(contentType: "text/json") {
             result
         }
-    }
-
-    /**
-     * Do logouts through this app so we can invalidate the session.
-     *
-     * @param casUrl the url for logging out of cas
-     * @param appUrl the url to redirect back to after the logout
-     */
-    def logout = {
-        session.invalidate()
-        redirect(url:"${params.casUrl}?url=${params.appUrl}")
     }
 }

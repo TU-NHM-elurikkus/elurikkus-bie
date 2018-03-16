@@ -41,17 +41,30 @@
                 </div>
 
                 <div class="page-header-links">
-                    <g:each in="${kingdoms.searchResults.results}">
-                        <g:if test="${it.commonNameSingle}">
-                            <a
-                                class="page-header-links__link"
-                                href="${request.contextPath}/species/${it.linkIdentifier?:it.guid}#classification"
-                            >
-                                <span class="fa fa-sitemap"></span>
-                                <g:message code="search.header.kingodm.${it.kingdom}" default="${it.kingdom}" />
-                            </a>
-                        </g:if>
-                    </g:each>
+                    <a class="page-header-links__link" href="${request.contextPath}/species/674802#classification">
+                        <span class="fa fa-sitemap"></span>
+                        <g:message code="search.header.kingdom.Animalia" />
+                    </a>
+                    <a class="page-header-links__link" href="${request.contextPath}/species/191045#classification">
+                        <span class="fa fa-sitemap"></span>
+                        <g:message code="search.header.kingdom.Bacteria" />
+                    </a>
+                    <a class="page-header-links__link" href="${request.contextPath}/species/191044#classification">
+                        <span class="fa fa-sitemap"></span>
+                        <g:message code="search.header.kingdom.Chromista" />
+                    </a>
+                    <a class="page-header-links__link" href="${request.contextPath}/species/118934#classification">
+                        <span class="fa fa-sitemap"></span>
+                        <g:message code="search.header.kingdom.Fungi" />
+                    </a>
+                    <a class="page-header-links__link" href="${request.contextPath}/species/674814#classification">
+                        <span class="fa fa-sitemap"></span>
+                        <g:message code="search.header.kingdom.Plantae" />
+                    </a>
+                    <a class="page-header-links__link" href="${request.contextPath}/species/191531#classification">
+                        <span class="fa fa-sitemap"></span>
+                        <g:message code="search.header.kingdom.Protista" />
+                    </a>
                 </div>
             </div>
 
