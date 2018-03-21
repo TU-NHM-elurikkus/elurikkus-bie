@@ -279,6 +279,9 @@
     font-style: italic;
 }
 
+.taxon-name-italic {
+    font-style: italic;
+}
 
 /* Name annotations */
 .annotation {

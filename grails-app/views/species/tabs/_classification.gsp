@@ -76,7 +76,7 @@
                             >
                                 <g:render
                                     template="tabs/classification-taxon"
-                                    model="['taxon': taxon, 'name': taxon.scientificName ]" />
+                                    model="['taxon': taxon, 'name': taxon.scientificName]" />
                             </a>
                         </dd>
                     <%-- XXX The dl is left open on purpose --%>
@@ -92,7 +92,7 @@
                             <span>
                                 <g:render
                                     template="tabs/classification-taxon"
-                                    model="['taxon': taxon, 'name': taxon.scientificName ]" />
+                                    model="['taxon': taxon, 'name': taxon.scientificName]" />
                             </span>
                         </dd>
                     <%-- XXX The dl is left open on purpose --%>
