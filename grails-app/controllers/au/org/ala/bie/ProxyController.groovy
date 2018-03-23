@@ -316,7 +316,7 @@ class ProxyController {
         } catch(IOException) {
             // Mostly happens because of remote's restart
             // ToDo: Maybe should catch error again and return empty data so this wouldn't bother rollbar?
-            Thread.sleep(5);
+            Thread.sleep(5000);  // wait 5 seconds 
             outputStreamClientResponse.flush();
         }
     }
