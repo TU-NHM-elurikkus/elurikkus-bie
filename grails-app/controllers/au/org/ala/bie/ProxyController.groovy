@@ -243,7 +243,7 @@ class ProxyController {
      * back to the client via the given {@link HttpServletResponse}
      * @param httpMethodProxyRequest An object representing the proxy request to be made
      * @param httpServletResponse An object by which we can send the proxied
-     *                             response back to the client
+     *                            response back to the client
      * @throws IOException Can be thrown by the {@link org.apache.commons.httpclient.HttpClient}.executeMethod
      * @throws ServletException Can be thrown to indicate that another error has occurred
      */
@@ -311,7 +311,14 @@ class ProxyController {
         while ( ( intNextByte = bufferedInputStream.read() ) != -1 ) {
             outputStreamClientResponse.write(intNextByte);
         }
-        outputStreamClientResponse.flush()
+        try {
+            outputStreamClientResponse.flush();
+        } catch(IOException) {
+            // Mostly happens because of remote's restart
+            // ToDo: Maybe should catch error again and return empty data so this wouldn't bother rollbar?
+            Thread.sleep(5);
+            outputStreamClientResponse.flush();
+        }
     }
 
     private String getProxyURL(HttpServletRequest httpServletRequest, String pathInfo) {

@@ -26,7 +26,7 @@ class BieService {
         JSON.parse(json)
     }
 
-    def getSpeciesList(guid){
+    def getSpeciesList(guid) {
         if(!guid){
             return null
         }
