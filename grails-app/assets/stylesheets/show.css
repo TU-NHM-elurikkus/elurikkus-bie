@@ -53,6 +53,7 @@
 
 .taxon-summary-gallery .main-img img {
     max-height: 500px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
