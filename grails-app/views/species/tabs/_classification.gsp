@@ -10,6 +10,9 @@
             <g:message code="show.classification.title" />
         </g:else>
     </h3>
+    <div>
+        <g:message code="show.classification.updatedAt" /> 2018-03-16
+    </div>
 
     <g:if test="${tc.taxonConcept.rankID < 7000}">
         <div class="col classification-actions">
