@@ -997,15 +997,14 @@ function loadPlutoFTaxonDescription(taxonID, languageID) {
     var params = {
         page_size: 10,
         taxon_node: taxonID,
-        include: 'owner',
-        language: (languageID ? languageID : 123)  // 123 == eng, 126 == est
+        language: (languageID ? languageID : 123) // 123 == eng, 126 == est
     };
 
     $.getJSON(endpoint, params, function(data) {
-        var excludedFields = ['created_at', 'updated_at', 'taxon_name'];
+        var excludedFields = ['created_at', 'updated_at', 'taxon_name', 'rights_holder_name'];
         $.each(data.data, function(_index, desObj) {
             var $description = $('#descriptionTemplate').clone();
-            var owner = desObj.relationships.owner.data;
+            var owner_full_name = desObj.attributes.rights_holder_name;
 
             $description.attr('id', 'taxon-description-' + desObj.id);
 
@@ -1022,10 +1021,7 @@ function loadPlutoFTaxonDescription(taxonID, languageID) {
                     'https://plutof.ut.ee/#/taxon-description/view/' + desObj.id +
                 '</a>'
             );
-            owner = data.included.find(function(includeObj) {
-                return owner.id === includeObj.id && owner.type === includeObj.type;
-            });
-            $description.find('.rightsText').html(owner.attributes.full_name);
+            $description.find('.rightsText').html(owner_full_name);
 
             $description.find('.providedBy').html($.i18n.prop('show.overview.field.providedBy.plutof'));
             $description.find('.providedBy').attr('href', 'https://plutof.ut.ee/');
