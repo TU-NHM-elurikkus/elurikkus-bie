@@ -119,9 +119,10 @@
 
             <div class="taxon-map">
                 <h3>
-                    <g:message code="show.overview.occurrencesMap.title" />
-                    (<span class="occurrenceRecordCount">0</span>
-                    <g:message code="show.overview.occurrencesMap.nrRecords" />)
+                    <g:message code="show.overview.occurrencesMap.title" />.
+                    (<g:message code="show.overview.occurrences.total" /> <span class="occurrenceRecordCount">0</span>;
+                    <g:message code="show.overview.occurrences.est" /> <span class="occurrenceEstCount">0</span>;
+                    <g:message code="show.overview.occurrences.coords" /> <span class="occurrenceCoordsCount">0</span>)
                 </h3>
 
                 <div id="leafletMap"></div>

@@ -116,17 +116,22 @@ function loadMap() {
 }
 
 /**
- * Update the total records count for the occurrence map in heading text
+ * Update the total/est/coordinates records count for the occurrence map in heading text
  */
 function updateOccurrenceCount() {
-    $.getJSON(SHOW_CONF.biocacheServiceUrl + '/occurrences/taxaCount?guids=' + SHOW_CONF.guid + '&fq=' + SHOW_CONF.mapQueryContext, function(data) {
-        if(data) {
-            $.each(data, function(key, value) {
-                if(value && typeof value === 'number') {
-                    $('.occurrenceRecordCount').html(value.toLocaleString());
-                    return false;
-                }
-            });
+    $.getJSON(SHOW_CONF.biocacheServiceUrl + '/occurrences/search/?facets=country,geospatial_kosher&q=lsid:' + SHOW_CONF.guid + '&fq=' + SHOW_CONF.mapQueryContext, function(data) {
+        $('.occurrenceRecordCount').html(data.totalRecords.toLocaleString());
+
+        var countries = data.facetResults.filter(function(facet) { return facet.fieldName === 'country'; })[0];
+        if(countries !== undefined) {
+            var est = countries.fieldResult.filter(function(countryName) { return countryName.label === 'Estonia'; })[0];
+            $('.occurrenceEstCount').html(est.count.toLocaleString());
+        }
+
+        var coords = data.facetResults.filter(function(facet) { return facet.fieldName === 'geospatial_kosher'; })[0];
+        if(coords !== undefined) {
+            var withCoords = coords.fieldResult.filter(function(coordValue) { return coordValue.label === 'true'; })[0];
+            $('.occurrenceCoordsCount').html(withCoords.count.toLocaleString());
         }
     });
 }

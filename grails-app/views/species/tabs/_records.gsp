@@ -3,7 +3,7 @@
         <div id="recordBreakdowns">
             <h3>
                 <g:message code="show.records.chart.title" />
-                <g:message code="show.records.recordCount.title" />
+                (<span class="occurrenceRecordCount">0</span> <g:message code="show.records.recordCount.title" />)
             </h3>
 
             <%-- This is not page header but we can use its classes to lay out links in the same way. --%>
@@ -14,7 +14,7 @@
                 >
                     <span class="fa fa-list"></span>
                     <g:message code="general.btn.viewRecords" />
-                    <g:message code="show.records.recordCount.title" />
+                    (<span class="occurrenceRecordCount">0</span> <g:message code="show.records.recordCount.title" />)
                 </a>
 
                 <a
@@ -23,7 +23,7 @@
                 >
                     <span class="fa fa-map-o" aria-hidden="true"></span>
                     <g:message code="show.overview.map.btn.viewMap" />
-                    <g:message code="show.records.recordCount.title" />
+                    (<span class="occurrenceRecordCount">0</span> <g:message code="show.records.recordCount.title" />)
                 </a>
             </div>
 
