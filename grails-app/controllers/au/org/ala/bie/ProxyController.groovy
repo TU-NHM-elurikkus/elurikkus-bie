@@ -316,21 +316,22 @@ class ProxyController {
         } catch(IOException) {
             // Mostly happens because of remote's restart
             // ToDo: Maybe should catch error again and return empty data so this wouldn't bother rollbar?
-            Thread.sleep(5000);  // wait 5 seconds 
+            Thread.sleep(5000);  // wait 5 seconds
             outputStreamClientResponse.flush();
         }
     }
 
     private String getProxyURL(HttpServletRequest httpServletRequest, String pathInfo) {
         // Set the protocol to HTTP
-        String stringProxyURL = grailsApplication.config.biocacheService.baseURL
+        String stringProxyURL = grailsApplication.config.biocacheService.internal.url
 
-//        String stringProxyURL = (grailsApplication.config.proxy.proxyScheme?:'http://') + getProxyHostAndPort()
-//        String proxyPath = grailsApplication.config.proxy.proxyPath
-//        // Check if we are proxying to a path other that the document root
-//        if (proxyPath) {
-//            stringProxyURL += proxyPath
-//        }
+        // String stringProxyURL = (grailsApplication.config.proxy.proxyScheme?:'http://') + getProxyHostAndPort()
+        // String proxyPath = grailsApplication.config.proxy.proxyPath
+        // // Check if we are proxying to a path other that the document root
+        // if (proxyPath) {
+        //      stringProxyURL += proxyPath
+        // }
+
         // Handle the path given to the servlet
         stringProxyURL += pathInfo
         // Handle the query string by rebuilding from parameter map. This supports filters that alter parameters.
@@ -355,7 +356,7 @@ class ProxyController {
     }
 
     private String getProxyHostAndPort() {
-        String biocacheServiceUrl = grailsApplication.config.biocacheService.baseURL
+        String biocacheServiceUrl = grailsApplication.config.biocacheService.internal.url
         return biocacheServiceUrl + ":80"
     }
 

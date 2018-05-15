@@ -7,7 +7,8 @@
 <html>
     <head>
         <meta name="layout" content="${grailsApplication.config.skin.layout}" />
-        <g:set var="searchQuery" value="${!searchResults.queryTitle || searchResults.queryTitle == 'all records' ? message(code: 'search.query.allRecords') : searchResults.queryTitle}" />
+        <g:set var="searchQuery" value="${!searchResults?.queryTitle || searchResults.queryTitle == 'all records' ? message(code: 'search.query.allRecords') : searchResults.queryTitle}" />
+
         <title>
             <g:message code="index.body.title" />
         </title>
@@ -387,7 +388,7 @@
                                                     <g:message code="idxtype.${result.idxtype}" />:
 
                                                     %{-- We don't use Spatial Portal. Remove this block entirely? --}%
-                                                    <a href="${grailsApplication.config.spatial.baseURL}?layers=${result.guid}">
+                                                    <a href="${grailsApplication.config.spatial.ui.url}?layers=${result.guid}">
                                                         ${result.name}
                                                     </a>
                                                 </div>
