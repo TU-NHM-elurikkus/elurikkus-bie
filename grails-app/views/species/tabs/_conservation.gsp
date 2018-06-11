@@ -7,7 +7,7 @@
                 download="Laanekorgik.pdf"
                 class="erk-button erk-button--light erk-button-link"
             >
-                <span class="fa fa-file-o"></span>
+                <span class="fa fa-download"></span>
                 <g:message code="show.conservation.download" />
             </a>
         </div>
@@ -64,7 +64,7 @@
 
         <p class="conservation__block">
             <label class="conservation__block-label">
-                Kaitsemeetmed
+                Kaitsemeetmed.
             </label>
 
             Kindel määramine eeldab ekspertteadmist ja seetõttu on esmaseks kaitsemeetmeks
@@ -76,7 +76,7 @@
 
         <p class="conservation__block">
             <label class="conservation__block-label">
-                Kaitsejuhised
+                Kaitsejuhised.
             </label>
 
             Liik sõltub vanade viljakate kuusikute ja kuuse-segametsade pindalast ja seisundist (suurte
@@ -92,7 +92,7 @@
 
         <p class="conservation__block">
             <label class="conservation__block-label">
-                Tegevuskava
+                Tegevuskava.
             </label>
 
             Liik ei vaja spetsiaalset tegevuskava, kuid kaugemas perspektiivis vajab rakendusuuringut,
@@ -103,7 +103,7 @@
 
         <p class="conservation__block">
             <label class="conservation__block-label">
-                Kaitsekategooria
+                Kaitsekategooria.
             </label>
 
             Väga haruldase põlismetsaspetsiifilise liigina on põhjendatud I kaitsekategooria,
