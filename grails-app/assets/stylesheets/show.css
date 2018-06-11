@@ -407,3 +407,39 @@
 .map-button-inner {
     border-radius: 0;
 }
+
+/* Conservation */
+.conservation {
+    max-width: 600px;
+}
+
+.conservation__download-button {
+    margin-bottom: 1rem;
+}
+
+.conservation__block-label {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.conservation__block {
+    text-align: justify;
+}
+
+.conservation__block--authors {
+    margin: 1rem 0;
+    font-style: italic;
+}
+
+.conservation__taxon {
+    font-style: italic;
+}
+
+.conservation__references {
+    border-top: 1px solid black;
+
+    padding-top: 1rem;
+    padding-left: 0;
+
+    list-style: none;
+}
