@@ -133,8 +133,7 @@ class SpeciesController {
                     sortCommonNameSources: utilityService.getNamesAsSortedMap(taxonDetails.commonNames),
                     taxonHierarchy: bieService.getClassificationForGuid(taxonDetails.taxonConcept.guid),
                     childConcepts: bieService.getChildConceptsForGuid(taxonDetails.taxonConcept.guid),
-                    speciesList: bieService.getSpeciesList(taxonDetails.taxonConcept?.guid ?: guid),
-                    hasConservationInstructions: guid == "666935"
+                    speciesList: bieService.getSpeciesList(taxonDetails.taxonConcept?.guid ?: guid)
             ])
         }
     }

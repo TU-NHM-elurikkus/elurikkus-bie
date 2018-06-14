@@ -87,13 +87,11 @@
                             </a>
                         </li>
 
-                        <g:if test="${hasConservationInstructions}">
-                            <li class="nav-item">
-                                <a href="#tab-conservation" data-toggle="tab" class="nav-link">
-                                    <g:message code="show.conservation.title" />
-                                </a>
-                            </li>
-                        </g:if>
+                        <li id="conservationTabContainer" class="nav-item" style="display:none">
+                            <a href="#tab-conservation" data-toggle="tab" class="nav-link">
+                                <g:message code="show.conservation.title" />
+                            </a>
+                        </li>
 
                         <li class="nav-item">
                             <a href="#tab-gallery" data-toggle="tab" class="nav-link">

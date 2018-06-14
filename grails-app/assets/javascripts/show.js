@@ -6,6 +6,9 @@
 //= require ekko-lightbox-5.2.0
 //= require moment.min
 //= require jquery.htmlClean
+//= require markdown-it.min
+//= require markdown-it-sup.min
+//= require markdown-it-footnote.min
 
 var SHOW_CONF; // This constant is populated by show.gsp inline javascript
 var GLOBAL_LOCALE_CONF; // This constant is populated by show.gsp inline javascript
@@ -1007,20 +1010,32 @@ function loadPlutoFTaxonDescription(taxonID, languageID) {
     };
 
     $.getJSON(endpoint, params, function(data) {
-        var excludedFields = ['created_at', 'updated_at', 'taxon_name', 'rights_holder_name'];
+        var excludedFields = [
+            'created_at', 'updated_at', 'taxon_name', 'rights_holder_name', 'conservation_instructions'
+        ];
+
         $.each(data.data, function(_index, desObj) {
+            var conservationInstructions = desObj.attributes.conservation_instructions;
+
+            if(conservationInstructions) {
+                addConservationInstructions(conservationInstructions);
+                return;
+            }
+
             var $description = $('#descriptionTemplate').clone();
             var owner_full_name = desObj.attributes.rights_holder_name;
 
             $description.attr('id', 'taxon-description-' + desObj.id);
 
             var content = '';
+
             $.each(desObj.attributes, function(key, value) {
                 if(value && excludedFields.indexOf(key) === -1) {
                     // content += '<b>' + key + ':</b> ' + value + '<br />';
                     content += '<p>' + value + '</p>';
                 }
             });
+
             $description.find('.content').html(content);
             $description.find('.sourceText').html(
                 '<a target="_blank" href="https://plutof.ut.ee/#/taxon-description/view/' + desObj.id + '">' +
@@ -1036,4 +1051,16 @@ function loadPlutoFTaxonDescription(taxonID, languageID) {
             $description.show();
         });
     });
+}
+
+function addConservationInstructions(markdown) {
+    $('#conservationTabContainer').show();
+
+    var md = window.markdownit()
+        .use(window.markdownitSup)
+        .use(window.markdownitFootnote);
+
+    var renderedHTML = md.render(markdown);
+
+    $('#conservation').append(renderedHTML);
 }

@@ -8,7 +8,9 @@ class PlutofController {
 
     def doGet(String path) {
         // Yep, this is the shortest way to proxy a json get...
-        def url = 'https://api.plutof.ut.ee/v1/' + path + '?' + request.queryString
+        // def url = 'https://api.plutof.ut.ee/v1/' + path + '?' + request.queryString
+        // XXX DONTCOMMIT THIS
+        def url = 'http://localhost:7000/v1/' + path + '?' + request.queryString
         def urlObj = new java.net.URL(url)
 
         def connection = urlObj.openConnection()
