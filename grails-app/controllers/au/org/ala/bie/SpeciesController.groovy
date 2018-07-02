@@ -70,7 +70,7 @@ class SpeciesController {
 
         if (filterQuery.size() > 1 && filterQuery.findAll { it.size() == 0 }) {
             // remove empty fq= params IF more than 1 fq param present
-            def fq2 = filterQuery.findAll { it }  // excludes empty or null elements
+            def fq2 = filterQuery.findAll { it } // excludes empty or null elements
             redirect(
                 action: "search",
                 params: [q: query, fq: fq2, start: startIndex, rows: rows, score: sortField, dir: sortDirection]
