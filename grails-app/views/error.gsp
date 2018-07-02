@@ -16,6 +16,10 @@
     </head>
 
     <body>
+        <g:if test="${message}">
+            ${raw(message)}
+        </g:if>
+
         <g:if env="development">
             <g:renderException exception="${exception}" />
         </g:if>

@@ -70,26 +70,34 @@ class SpeciesController {
 
         if (filterQuery.size() > 1 && filterQuery.findAll { it.size() == 0 }) {
             // remove empty fq= params IF more than 1 fq param present
-            def fq2 = filterQuery.findAll { it } // excludes empty or null elements
+            def fq2 = filterQuery.findAll { it }  // excludes empty or null elements
             redirect(
                 action: "search",
                 params: [q: query, fq: fq2, start: startIndex, rows: rows, score: sortField, dir: sortDirection]
             )
         }
 
-        if (searchResults instanceof JSONObject && searchResults.has("error")) {
-            log.error "TaxonConcept get Error: ${searchResults.error} | params: ${params} | ${searchResults.error}"
-            render(view: "../error", model: [message: searchResults.error])
-        } else {
-            render(view: "search", model: [
-                searchResults: searchResults?.searchResults,
-                facetMap: utilityService.addFacetMap(filterQuery),
-                query: query?.trim(),
-                filterQuery: filterQuery,
-                idxTypes: utilityService.getIdxtypes(searchResults?.searchResults?.facetResults),
-                collectionsMap: utilityService.addFqUidMap(filterQuery)
-            ])
+        def searchError = ""
+        if(searchResults instanceof JSONObject) {
+            if(searchResults?.error != null) {
+                searchError = "${searchResults?.error}"
+                // a super hacky way of checking whether search input is faulty. user input isn't validated at all, so we
+                // search 400 from error message and just tell user to check input
+                if(!searchError.contains("Server returned HTTP response code: 400")) {
+                    log.error "TaxonConcept get Error: search() | params: ${params} | ${searchResults}"
+                }
+            }
         }
+
+        render(view: "search", model: [
+            errors: searchError,
+            searchResults: searchResults?.searchResults ? searchResults.searchResults : [],
+            facetMap: utilityService.addFacetMap(filterQuery),
+            query: query?.trim(),
+            filterQuery: filterQuery,
+            idxTypes: utilityService.getIdxtypes(searchResults?.searchResults?.facetResults),
+            collectionsMap: utilityService.addFqUidMap(filterQuery)
+        ])
     }
 
     /**
@@ -118,7 +126,7 @@ class SpeciesController {
                 response.status = 404
                 render(view: "../404", model: [message: "Requested taxon <b>${guid}</b> was not found"])
             } else {
-                log.info("TaxonConcept get Error: ${guid} | params: ${params} | ${taxonDetails.error}")
+                log.info("TaxonConcept get Error: show() | ${guid} | params: ${params} | ${taxonDetails.error}")
                 render(view: "../error", model: [message: taxonDetails.error])
             }
         } else if (taxonDetails.taxonConcept?.guid && taxonDetails.taxonConcept.guid != guid) {

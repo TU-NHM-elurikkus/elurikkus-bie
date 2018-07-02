@@ -7,7 +7,7 @@
             <h1>404</h1>
 
             <g:if test="${message}">
-                ${message}
+                ${raw(message)}
             </g:if>
             <g:else>
                 Well, stuff can go wrong sometimes and maybe you mistyped a URL, tapped/clicked on a broken link or your

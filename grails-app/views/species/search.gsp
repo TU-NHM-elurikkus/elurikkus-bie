@@ -72,7 +72,7 @@
             <div class="search-section">
                 <g:render template="searchBox" />
                 <p>
-                    <g:message code="search.results.overview" args="${[searchQuery, formatNumber(number: searchResults.totalRecords)] }" />
+                    <g:message code="search.results.overview" args="${[searchQuery, formatNumber(number: searchResults?.totalRecords ? searchResults.totalRecords : 0)] }" />
                 </p>
 
                 <g:if test="${facetMap}">
@@ -80,7 +80,7 @@
                 </g:if>
             </div>
 
-            <g:if test="${searchResults.totalRecords}">
+            <g:if test="${searchResults?.totalRecords}">
                 <g:set var="paramsValues" value="${[:]}" />
 
                 <div class="row">
@@ -504,6 +504,11 @@
                     </div>
                 </div>
             </g:if>
+            <g:elseif test="${errors}">
+                <div class="col erk-text erk-text--error">
+                    <g:message code="search.errorMsg" />
+                </div>
+            </g:elseif>
         </div>
 
         <%-- TODO --%>

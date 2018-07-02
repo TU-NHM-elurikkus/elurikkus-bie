@@ -14,8 +14,9 @@ class WebService implements InitializingBean {
     }
 
     def get(String url){
-        get(url,false)
+        get(url, false)
     }
+
     def get(String url, boolean throwError) {
         log.debug "GET on " + url
         def conn = new URL(url).openConnection()
@@ -33,7 +34,7 @@ class WebService implements InitializingBean {
             }
         } catch (Exception e) {
             if(throwError)
-                throw e;
+                throw e
             else {
                 def error = [error: "Failed calling web service. ${e.getClass()} ${e.getMessage()} URL= ${url}."]
                 println error.error

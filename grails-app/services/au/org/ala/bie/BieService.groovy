@@ -21,7 +21,6 @@ class BieService {
     def searchBie(SearchRequestParamsDTO requestObj) {
 
         def queryUrl = "${BIE_SERVICE_BACKEND_URL}/search?${requestObj.getQueryString()}&facets=${grailsApplication.config.facets}&q.op=OR"
-
         // add a query context for BIE - to reduce taxa to a subset
         if(grailsApplication.config.bieService.queryContext){
             queryUrl = queryUrl + "&" + URLEncoder.encode(grailsApplication.config.bieService.queryContext, "UTF-8")
