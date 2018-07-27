@@ -388,7 +388,7 @@
             // @TODO replace bhl and trove with literatureSource list
             var SHOW_CONF = {
                 biocacheUrl:        "${grailsApplication.config.occurrences.ui.url}",
-                biocacheServiceUrl: "${grailsApplication.config.bie.ui.url}/proxy/biocache-service",
+                biocacheServiceUrl: "${grailsApplication.config.biocacheService.ui.url}",
                 layersServiceUrl:   "${grailsApplication.config.layersService.ui.url}",
                 collectoryUrl:      "${grailsApplication.config.collectory.ui.url}",
                 profileServiceUrl:  "${grailsApplication.config.profileService.baseURL}",
