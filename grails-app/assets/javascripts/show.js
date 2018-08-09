@@ -256,6 +256,9 @@ function loadExternalSources() {
                         $description.find('.title').html(dataObject.title);
                     }
 
+                    // Because eol sometimes sends <a> tags with dynamic href
+                    dataObject.description = dataObject.description.replace('<a href="/', '<a href="http://eol.org/');
+
                     var descriptionDom = $.parseHTML(dataObject.description);
                     var body = $(descriptionDom).find('#bodyContent > p:lt(2)').html(); // for really long EOL blocks
 
