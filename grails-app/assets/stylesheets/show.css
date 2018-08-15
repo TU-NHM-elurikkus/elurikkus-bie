@@ -295,34 +295,6 @@
     font-size: smaller;
 }
 
-
-/* charts config */
-#charts {
-    padding-top: 2rem;
-}
-
-.chart {
-    display: block;
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    margin-bottom: 1rem;
-    padding-right: 250px;
-}
-
-.chart-legend {
-    position: absolute;
-    top: 1rem;
-    right: 0;
-    width: 250px;
-    font-size: 12px;
-}
-
-#data_resource_uid-chart {
-    width: 100%;
-}
-
-
 /* Hide wikipedia links */
 .mw-editsection {
     display: none;

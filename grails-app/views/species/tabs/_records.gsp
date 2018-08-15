@@ -27,7 +27,7 @@
                 </a>
             </div>
 
-            <div id="charts"></div>
+            <div id="charts" class="charts-container"></div>
         </div>
     </div>
 </section>
