@@ -36,7 +36,7 @@
         <asset:javascript src="show.js" />
 
         <g:if test="${grailsApplication.config.google.apikey}">
-            <script src="https://maps.google.com/maps/api/js?v=3.5&sensor=false&key=${grailsApplication.config.google.apikey}" type="text/javascript"></script>
+            <script src="https://maps.google.com/maps/api/js?v=3.34&key=${grailsApplication.config.google.apikey}" type="text/javascript"></script>
         </g:if>
         <g:else>
             <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -442,8 +442,7 @@
                 addPreferenceButton: "${authService?.getUserId() ? (authService.getUserForUserId(authService.getUserId())?.roles?.contains('ROLE_ADMIN') ? true : false) : false}",
                 mapOutline: "${grailsApplication.config.map.outline ?: 'false'}",
                 mapEnvOptions: "${grailsApplication.config.map.env?.options ?: 'color:' + grailsApplication.config.map.records.colour+ ';name:circle;size:4;opacity:0.8'}",
-                locale: "${locale}",
-                hasGoogleKey: ${grailsApplication.config.google.apikey as Boolean}
+                locale: "${locale}"
             };
 
             function openTab(anchor) {
@@ -483,11 +482,6 @@
                     openTab(window.location.hash.replace('#', '#tab-'));
                 }
             });
-
-            // Google charts
-            if(!SHOW_CONF.hasGoogleKey) {
-                google.load('maps', '3.5', {other_params: "sensor=false"});
-            }
         </g:javascript>
     </body>
 </html>
