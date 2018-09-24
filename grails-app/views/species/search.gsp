@@ -20,12 +20,10 @@
             // global var to pass GSP vars into JS file
             var SEARCH_CONF = {
                 query: "${BieTagLib.escapeJS(query)}",
-                serverName: "${grailsApplication.config.bie.ui.url}",
                 bieUrl: "${grailsApplication.config.bie.ui.url}",
                 biocacheUrl: "${biocacheUrl}",
                 biocacheServicesUrl: "${grailsApplication.config.biocacheService.ui.url}",
                 biocacheQueryContext: "${grailsApplication.config.biocacheService.queryContext}",
-                geocodeLookupQuerySuffix: "${grailsApplication.config.geocode.querySuffix}"
             }
         </g:javascript>
     </head>
@@ -510,48 +508,5 @@
                 </div>
             </g:elseif>
         </div>
-
-        <%-- TODO --%>
-        <div id="result-template" class="row hidden-node">
-            <div class="col-sm-12">
-                <ol class="search-results list-unstyled">
-                    <li class="search-result clearfix">
-                        <h4>
-                            <g:message code="idxtype.LOCALITY" /> :
-
-                            <a class="exploreYourAreaLink" href="">
-                                <g:message code="search.areaSearch.label" />
-                            </a>
-                        </h4>
-                    </li>
-                </ol>
-            </div>
-        </div>
-
-        <g:if test="${searchResults.totalRecords == 0}">
-            <script>
-                $(function() {
-                    $.get(SEARCH_CONF.serverName + "/geo?q=" + SEARCH_CONF.query  + ' ' + SEARCH_CONF.geocodeLookupQuerySuffix, function(searchResults) {
-                        for(var i=0; i < searchResults.length; i++) {
-                            var $results = $('#result-template').clone(true);
-
-                            $results.attr('id', 'results-lists');
-                            $results.removeClass('hidden-node');
-
-                            if(searchResults.length > 0) {
-                                $results.find('.exploreYourAreaLink').html(searchResults[i].name);
-                                $results.find('.exploreYourAreaLink').attr('href',
-                                    '${grailsApplication.config.occurrences.ui.url}/explore/your-area#' +
-                                    searchResults[0].latitude +
-                                    '|' + searchResults[0].longitude +
-                                    '|12|ALL_SPECIES'
-                                );
-                                $('#search-results-panel').append($results.html());
-                            }
-                        }
-                    });
-                });
-            </script>
-        </g:if>
     </body>
 </html>

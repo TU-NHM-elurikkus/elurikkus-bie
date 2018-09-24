@@ -1,7 +1,5 @@
 package au.org.ala.bie
 
-import grails.converters.deep.JSON
-import groovy.json.JsonSlurper
 import org.codehaus.groovy.grails.web.json.JSONObject
 
 /**
@@ -15,33 +13,6 @@ class SpeciesController {
     def utilityService
     def biocacheService
     def grailsApplication
-
-    def geoSearch = {
-
-        def searchResults = []
-        try {
-            def googleMapsKey = grailsApplication.config.googleMapsApiKey
-            def url = "https://maps.googleapis.com/maps/api/geocode/json?key=${googleMapsKey}&address=" +
-                URLEncoder.encode(params.q, "UTF-8")
-            def response = new URL(url).text
-            def js = new JsonSlurper()
-            def json = js.parseText(response)
-
-            if (json.results) {
-                json.results.each {
-                    searchResults << [
-                        name: it.formatted_address,
-                        latitude: it.geometry.location.lat,
-                        longitude: it.geometry.location.lng
-                    ]
-                }
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e)
-        }
-
-        render searchResults as JSON
-    }
 
     /**
      * Search page - display search results fro the BIE (includes results for non-species pages too)
