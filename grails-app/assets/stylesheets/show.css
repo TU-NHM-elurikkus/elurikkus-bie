@@ -131,6 +131,16 @@
     padding-bottom: 1rem;
 }
 
+@media screen and (max-width: 600px) {
+    .leaflet-map-container {
+        max-height: 320px;
+    }
+}
+
+.bie-card {
+    margin-bottom: 20px;
+}
+
 /* Taxon resources */
 .panel-resources .panel-body {
     -moz-columns: 150px 2;

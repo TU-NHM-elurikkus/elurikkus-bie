@@ -125,7 +125,7 @@
                     <g:message code="show.overview.occurrences.coords" /> <span class="occurrenceCoordsCount">0</span>)
                 </h3>
 
-                <div id="leafletMap"></div>
+                <div id="leafletMap" class="leaflet-map-container"></div>
 
                 <g:set
                     var="recordSearchUrl"
