@@ -32,15 +32,21 @@
             ${tc?.taxonConcept?.nameString} ${(tc?.commonNames) ? ' : ' + tc?.commonNames?.get(0)?.nameString : ''}
         </title>
 
-        <asset:stylesheet src="show.css" />
-        <asset:javascript src="show.js" />
-
         <g:if test="${grailsApplication.config.google.apikey}">
-            <script src="https://maps.google.com/maps/api/js?v=3.34&key=${grailsApplication.config.google.apikey}" type="text/javascript"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?v=3.5&key=${grailsApplication.config.google.apikey}" type="text/javascript"></script>
         </g:if>
         <g:else>
             <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         </g:else>
+
+        <script type="text/javascript">
+            <g:if test="${!grailsApplication.config.google.apikey}">
+                google.load('maps','3.5',{ other_params: "sensor=false" });
+            </g:if>
+        </script>
+
+        <asset:stylesheet src="show.css" />
+        <asset:javascript src="show.js" />
     </head>
 
     <body>
