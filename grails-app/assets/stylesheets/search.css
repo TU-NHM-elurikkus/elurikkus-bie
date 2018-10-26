@@ -61,3 +61,35 @@ a.expand-options {
     padding-top: 2px;
     border-top: 1px solid #e3e3e3;
 }
+
+.results-row {
+    flex-wrap: wrap;
+}
+
+.results-container {
+    flex: 1;
+    margin: 0 15px;
+    min-width: 280px;
+}
+
+.filters-container {
+    display: block;
+    margin-left: 15px;
+    max-width: 400px;
+}
+
+.filters-container--collapsed {
+    display: none;
+}
+
+.filters-container-btn {
+    background: transparent;
+    border: 0;
+    color: #0587aa;
+    cursor: pointer;
+    height: initial;
+    padding: 0;
+    text-decoration: none;
+    transition: color .1s ease;
+    white-space: nowrap;
+}

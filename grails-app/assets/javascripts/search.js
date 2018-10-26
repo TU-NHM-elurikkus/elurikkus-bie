@@ -1,3 +1,5 @@
+//= require filters-container
+
 var SEARCH_CONF;  // This constant is populated by search.gsp inline javascript
 
 $(document).ready(function() {
@@ -39,6 +41,8 @@ $(document).ready(function() {
             }
         });
     }
+
+    filtersContainer.init();
 });
 
 /**

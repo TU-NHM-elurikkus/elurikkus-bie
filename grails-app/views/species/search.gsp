@@ -81,22 +81,37 @@
             <g:if test="${searchResults?.totalRecords}">
                 <g:set var="paramsValues" value="${[:]}" />
 
+                <%-- Buttons --%>
                 <div class="row">
-                    <%-- Refine info --%>
-                    <div class="col-sm-4 col-md-5 col-lg-3">
-                        <div class="row">
-                            <div class="col">
-                                <p>
-                                    <span class="fa fa-info-circle"></span>
-                                    <g:message code="search.facets.refine" />
-                                </p>
-                            </div>
+                    <div class="inline-controls inline-controls--right order-sm-2">
+                        <div class="inline-controls__group">
+                            <a
+                                id="view-records-btn"
+                                class="erk-button erk-button-link erk-button--dark"
+                                href=""
+                                title="${message(code: 'general.btn.viewRecords')}"
+                                style="display: none;"
+                            >
+                                <span class="fa fa-list"></span>
+                                <g:message code="general.btn.viewRecords" />
+                            </a>
                         </div>
                     </div>
 
+                    <div class="col">
+                        <p>
+                            <button type="button" onclick="filtersContainer.toggle()" class="filters-container-btn">
+                                <span class="fa fa-filter"></span>
+                                <g:message code="search.facets.refine" />
+                            </button>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row results-row">
                     <%-- Refine filters --%>
-                    <div class="col-sm-4 col-md-5 col-lg-3 order-sm-2">
-                        <div class="card card-body filters-container">
+                    <div id="filters-container" class="filters-container filters-container--collapsed">
+                        <div id="filters-card" class="card card-body">
                             <div id="refine-options">
                                 <g:if test="${query && filterQuery}">
                                     <g:set var="queryParam">q=${query.encodeAsHTML()}
@@ -202,30 +217,9 @@
                         </div>
                     </div>
 
-                    <%-- Buttons --%>
-                    <div class="col-sm-8 col-md-7 col-lg-9">
-                        <div class="row">
-                            <div class="col">
-                                <div class="inline-controls inline-controls--right">
-                                    <div class="inline-controls__group">
-                                        <a
-                                            id="view-records-btn"
-                                            class="erk-button erk-button-link erk-button--dark"
-                                            href=""
-                                            title="${message(code: 'general.btn.viewRecords')}"
-                                            style="display: none;"
-                                        >
-                                            <span class="fa fa-list"></span>
-                                            <g:message code="general.btn.viewRecords" />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <%-- Search results --%>
-                    <div class="col-sm-8 col-md-7 col-lg-9 order-sm-2">
+                    <div class="results-container">
                         <div id="search-results-panel" class="card card-body">
                             <div class="search-header">
                                 <g:if test="${idxTypes.contains("TAXON")}">
