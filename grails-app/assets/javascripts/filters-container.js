@@ -21,5 +21,12 @@ var filtersContainer = {};
 
     this.init = function() {
         this.container = document.getElementById('filters-container');
+
+        if(this.container === null) {
+            // Something went wrong, pack your bags.
+            this.collapse = this.expand = this.toggle = null;
+        } else if(window.innerWidth > 720) {
+            this.expand();
+        }
     }
 }).apply(filtersContainer);
