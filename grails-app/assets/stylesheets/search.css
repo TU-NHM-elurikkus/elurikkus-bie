@@ -87,9 +87,21 @@ a.expand-options {
     border: 0;
     color: #0587aa;
     cursor: pointer;
-    height: initial;
+    height: 100%;
     padding: 0;
     text-decoration: none;
     transition: color .1s ease;
     white-space: nowrap;
+}
+
+.filters-control-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -1rem;
+}
+
+.filters-control-col {
+    height: inherit;
+    margin: 0 1rem 1rem 1rem;
 }

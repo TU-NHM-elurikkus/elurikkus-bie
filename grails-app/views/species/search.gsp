@@ -82,29 +82,25 @@
                 <g:set var="paramsValues" value="${[:]}" />
 
                 <%-- Buttons --%>
-                <div class="row">
-                    <div class="inline-controls inline-controls--right order-sm-2">
-                        <div class="inline-controls__group">
-                            <a
-                                id="view-records-btn"
-                                class="erk-button erk-button-link erk-button--dark"
-                                href=""
-                                title="${message(code: 'general.btn.viewRecords')}"
-                                style="display: none;"
-                            >
-                                <span class="fa fa-list"></span>
-                                <g:message code="general.btn.viewRecords" />
-                            </a>
-                        </div>
+                <div class="filters-control-row">
+                    <div class="filters-control-col order-sm-2">
+                        <a
+                            id="view-records-btn"
+                            class="erk-button erk-button-link erk-button--dark"
+                            href=""
+                            title="${message(code: 'general.btn.viewRecords')}"
+                            style="display: none;"
+                        >
+                            <span class="fa fa-list"></span>
+                            <g:message code="general.btn.viewRecords" />
+                        </a>
                     </div>
 
-                    <div class="col">
-                        <p>
-                            <button type="button" onclick="filtersContainer.toggle()" class="filters-container-btn">
-                                <span class="fa fa-filter"></span>
-                                <g:message code="search.facets.refine" />
-                            </button>
-                        </p>
+                    <div class="filters-control-col">
+                        <button type="button" onclick="filtersContainer.toggle()" class="filters-container-btn">
+                            <span class="fa fa-filter"></span>
+                            <g:message code="search.facets.refine" />
+                        </button>
                     </div>
                 </div>
 
@@ -497,8 +493,10 @@
                 </div>
             </g:if>
             <g:elseif test="${errors}">
-                <div class="col erk-text erk-text--error">
-                    <g:message code="search.errorMsg" />
+                <div class="row">
+                    <div class="col erk-text erk-text--error">
+                        <g:message code="search.errorMsg" />
+                    </div>
                 </div>
             </g:elseif>
         </div>
