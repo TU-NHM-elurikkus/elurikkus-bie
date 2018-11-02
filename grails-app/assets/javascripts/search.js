@@ -64,9 +64,6 @@ function removeFacet(facetIdx) {
 
     if(fqList !== null && fqList.length > 0) {
         paramList.push('fq=' + fqList.join('&fq='));
-    } else {
-        // empty fq so redirect doesn't happen
-        paramList.push('fq=');
     }
 
     window.location.href = window.location.pathname + '?' + paramList.join('&');

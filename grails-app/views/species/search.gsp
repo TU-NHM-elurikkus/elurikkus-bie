@@ -178,7 +178,7 @@
 
                                                     <g:else>
                                                         <li class="search-facet__value ${vs > 4 ? 'collapse' : ''}">
-                                                            <a href="?${request.queryString}&fq=${facetResult.fieldName}:%22${fieldResult.label}%22">
+                                                            <a href="?${request.queryString}&fq=${facetResult.fieldName}:${fieldResult.label}">
                                                                 <span class="fa fa-square-o"></span>
 
                                                                 <g:if test="${facetResult.fieldName == 'rank'}">
