@@ -127,12 +127,12 @@
 
                                 <%-- facets --%>
                                 <g:each var="facetResult" in="${searchResults.facetResults}">
-                                    <g:if test="${!facetMap?.get(facetResult.fieldName) && !filterQuery?.contains(facetResult.fieldResult?.opt(0)?.label) && !facetResult.fieldName?.contains('idxtype1') && facetResult.fieldResult.length() > 0 }">
-                                        <div id="facet-${facetResult.fieldName}" class="search-facet">
-                                            <h4 class="search-facet__header">
-                                                <g:message code="facet.${facetResult.fieldName}" default="${facetResult.fieldName}" />
-                                            </h4>
+                                    <div id="facet-${facetResult.fieldName}" class="search-facet">
+                                        <h4 class="search-facet__header">
+                                            <g:message code="facet.${facetResult.fieldName}" default="${facetResult.fieldName}" />
+                                        </h4>
 
+                                        <g:if test="${!facetMap?.get(facetResult.fieldName) && !filterQuery?.contains(facetResult.fieldResult?.opt(0)?.label) && !facetResult.fieldName?.contains('idxtype1') && facetResult.fieldResult.length() > 0 }">
                                             <ul id="facet-${facetResult.fieldName}-list" class="search-facet__values list-unstyled">
                                                 <g:set var="lastElement" value="${facetResult.fieldResult?.get(facetResult.fieldResult.length() - 1)}" />
 
@@ -206,8 +206,8 @@
                                                     </a>
                                                 </ul>
                                             </g:if>
-                                        </div>
-                                    </g:if>
+                                        </g:if>
+                                    </div>
                                 </g:each>
                             </div>
                         </div>
