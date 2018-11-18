@@ -32,17 +32,19 @@ class ExternalSiteController {
         response.setContentType("application/json")
         try {
             def jsonText = new java.net.URL(searchURL).getText("UTF-8")
-            def json = js.parseText(jsonText)
+            if(jsonText) {
+                def json = js.parseText(jsonText)
 
-            // get first pageId
-            if(json.results) {
-                def pageId = json.results[0].id
-                def pageUrl = "${eolBase}/pages/1.0/${pageId}.json?images=00&videos=0&sounds=0&maps=0&text=2&iucn=false&subjects=overview&licenses=all&details=true&taxonomy=false&vetted=0&language=${locale}&cache_ttl="
+                // get first pageId
+                if(json.results) {
+                    def pageId = json.results[0].id
+                    def pageUrl = "${eolBase}/pages/1.0/${pageId}.json?images=00&videos=0&sounds=0&maps=0&text=2&iucn=false&subjects=overview&licenses=all&details=true&taxonomy=false&vetted=0&language=${locale}&cache_ttl="
 
-                def pageText = new java.net.URL(pageUrl).getText("UTF-8")
-                render pageText
-            } else {
-                render ([:] as JSON)
+                    def pageText = new java.net.URL(pageUrl).getText("UTF-8")
+                    render pageText
+                } else {
+                    render ([:] as JSON)
+                }
             }
         } catch (IOException | FileNotFoundException err) {
             render (["Error": err.getMessage()] as JSON)
