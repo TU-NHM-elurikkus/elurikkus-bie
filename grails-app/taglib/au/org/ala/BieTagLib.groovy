@@ -32,6 +32,7 @@ class BieTagLib {
         def rank = attrs.rank
         def accepted = attrs.acceptedName
         def taxonomicStatus = attrs.taxonomicStatus
+
         def parsed = { n, r, incAuthor ->
             PhraseNameParser pnp = new PhraseNameParser()
             try {
@@ -44,7 +45,7 @@ class BieTagLib {
                     </span>
                 """
             } catch (Exception ex) {
-                log.warn "Error parsing name (${n}): ${ex}", ex
+                log.debug "Error parsing name (${n}): ${ex}", ex
             }
             n
         }
