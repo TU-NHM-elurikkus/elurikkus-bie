@@ -55,7 +55,7 @@ grails.project.dependency.resolution = {
         compile ":asset-pipeline:2.14.1"
         compile ":cache:1.1.8"
         compile ":jquery:1.11.1"
-        compile ":images-client-plugin:0.7.9-SNAPSHOT"
+        compile ":images-client-plugin:0.7.9"
         compile ":elurikkus-charts:1.3"
         compile ":elurikkus-commons:0.2-SNAPSHOT"
     }

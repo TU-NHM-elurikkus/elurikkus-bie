@@ -19,7 +19,7 @@ class UrlMappings {
 
         "/species/$guid**"(controller: "species", action: "show")
         "/geo"(controller: "species", action: "geoSearch")
-        "/search"(controller: "species", action: "search")
+        "/search" (controller: "species", action: "search")
         "/image-search"(controller: "species", action: "imageSearch")
         "/image-search/showSpecies"(controller: "species", action: "imageSearch")
         "/image-search/infoBox"(controller: "species", action: "infoBox")
@@ -28,6 +28,11 @@ class UrlMappings {
         "/sound-search"(controller: "species", action: "soundSearch")
         "/logout"(controller: "species", action: "logout")
         "/"(view:"/index")
+
+        name search: "/search" {
+            controller = "species"
+            action = "search"
+        }
 
         "500" (view: "/error")
 	}

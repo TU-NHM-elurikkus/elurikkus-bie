@@ -480,7 +480,7 @@
 
                             <div>
                                 <g:paginate
-                                    action="search"
+                                    mapping="search"
                                     omitLast="true"
                                     params="${[q: params.q, fq: params.fq, sortField: params.sortField, dir: params.dir, rows: params.rows ? params.rows : 25]}"
                                     total="${searchResults?.totalRecords}"
