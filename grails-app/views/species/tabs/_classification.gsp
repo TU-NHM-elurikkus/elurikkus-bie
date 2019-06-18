@@ -48,7 +48,7 @@
                 </a>
 
                 <a
-                    href="${createLink(controller: 'species', action: 'search')}?q=${'rkid_' + tc.taxonConcept.rankString + ':' + tc.taxonConcept.guid}"
+                    href="${createLink(mapping: 'search')}?q=${tc.taxonConcept.rankString + 'ID_s:' + tc.taxonConcept.guid}"
                     class="page-header-links__link"
                 >
                     <span class="fa fa-search"></span>
