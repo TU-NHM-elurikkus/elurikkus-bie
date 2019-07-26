@@ -1038,7 +1038,7 @@ function loadPlutoFTaxonDescription(taxonID, languageID) {
             $.each(desObj.attributes, function(key, value) {
                 if(value && excludedFields.indexOf(key) === -1) {
                     // content += '<b>' + key + ':</b> ' + value + '<br />';
-                    content += '<p>' + value + '</p>';
+                    content += '<p>' + value.replace(/\n/g, '<br>') + '</p>';
                 }
             });
 
