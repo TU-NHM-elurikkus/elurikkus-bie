@@ -26,7 +26,7 @@
                 </g:set>
 
                 <a
-                    href="${grailsApplication.config.bie.index.url}/download?q=rkid_${tc.taxonConcept.rankString}:${tc.taxonConcept.guid}&${grailsApplication.config.bieService.queryContext}"
+                    href="${grailsApplication.config.bie.index.url}/download?q=${tc.taxonConcept.rankString}ID_s:${tc.taxonConcept.guid}&${grailsApplication.config.bieService.queryContext}"
                     class="page-header-links__link"
                 >
                     <span class="fa fa-download"></span>
@@ -37,7 +37,7 @@
                 </a>
 
                 <a
-                    href="${grailsApplication.config.bie.index.url}/download?q=rkid_${tc.taxonConcept.rankString}:${tc.taxonConcept.guid}&fq=rank:species&${grailsApplication.config.bieService.queryContext}"
+                    href="${grailsApplication.config.bie.index.url}/download?q=${tc.taxonConcept.rankString}ID_s:${tc.taxonConcept.guid}&fq=rank:species&${grailsApplication.config.bieService.queryContext}"
                     class="page-header-links__link"
                 >
                     <span class="fa fa-download"></span>
