@@ -1119,8 +1119,11 @@ const loadRedlistAssessments = (function() {
     };
 
     function load(taxonID) {
-        var endpoint = '/bie-hub/proxy/plutof/redbook/red-list-species';
-        var params = { taxon_node: taxonID };
+        var endpoint = '/bie-hub/proxy/plutof/redbook/red-list-assessments';
+        var params = {
+            taxon_node: taxonID,
+            red_list: 1  // Only show assessments of the official Estonian Red List
+        };
 
         return loadJSON(endpoint, params).then(response => {
             return Promise.all(response.data.map(resolveAssessment));
@@ -1150,7 +1153,7 @@ const loadRedlistAssessments = (function() {
         wrap.classList.add('redlist-assessment')
 
         const link = document.createElement('a');
-        link.href = `https://plutof.ut.ee/#/conservation-lab/red-list/view/${assessment.id}`;
+        link.href = `https://plutof.ut.ee/#/conservation-lab/red-list-assessment/view/${assessment.id}`;
 
         link.innerHTML = `${assessment.assessmentDate}: ${assessment.title}`;
 
