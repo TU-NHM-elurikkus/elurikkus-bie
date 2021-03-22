@@ -1100,18 +1100,6 @@ const loadRedlistAssessments = (function() {
     return function(taxonID) {
         return load(taxonID).then(assessments => {
             if(assessments.length > 0) {
-                assessments.sort((x, y) => {
-                    if(x.assessmentDate < y.assessmentDate) {
-                        return 1;
-                    }
-
-                    if(x.assessmentDate > y.assessmentDate) {
-                        return -1;
-                    }
-
-                    return 0;
-                });
-
                 assessments.forEach(show);
                 $('#redlistTabContainer').show();
             }
@@ -1122,7 +1110,9 @@ const loadRedlistAssessments = (function() {
         var endpoint = '/bie-hub/proxy/plutof/redbook/red-list-assessments';
         var params = {
             taxon_node: taxonID,
-            red_list: 1  // Only show assessments of the official Estonian Red List
+            red_list: 1,  // Only show assessments of the official Estonian Red List
+            assessment_date_null: false,  // Exclude assessments without date
+            ordering: '-assessment_date'
         };
 
         return loadJSON(endpoint, params).then(response => {
