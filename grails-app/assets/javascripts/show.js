@@ -1101,7 +1101,9 @@ const loadRedlistAssessments = (function() {
         return load(taxonID).then(assessments => {
             if(assessments.length > 0) {
                 assessments.forEach(show);
-                $('#redlistTabContainer').show();
+            } else {
+                var noRecords = document.createTextNode("No assessments available");
+                document.getElementById("redlist").appendChild(noRecords);
             }
         });
     };
