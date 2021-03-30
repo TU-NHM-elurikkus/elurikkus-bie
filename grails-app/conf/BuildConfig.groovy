@@ -13,6 +13,9 @@ grails.project.fork = [
     console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256] // configure settings for the Console UI JVM
 ]
 
+// Uncomment if you need to run local server on something else than 8080
+// grails.server.port.http = 8181
+
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies

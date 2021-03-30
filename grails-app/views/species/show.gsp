@@ -145,7 +145,7 @@
                             </a>
                         </li>
 
-                        <li id="redlistTabContainer" class="nav-item" style="display:none">
+                        <li id="redlistTabContainer" class="nav-item">
                             <a href="#tab-redlist" data-toggle="tab" class="nav-link">
                                 <g:message code="show.redlist.title" />
                             </a>
@@ -426,9 +426,9 @@
                 eolUrl:             "${raw(createLink(controller: 'externalSite', action: 'eol', params: [s: tc?.taxonConcept?.nameString ?: '', f:tc?.classification?.class ?: tc?.classification?.phylum ?: '']))}",
                 soundUrl:           "${createLink(controller: 'species', action: 'soundSearch', params: [s: tc?.taxonConcept?.nameString ?: ''])}",  // FixMe: do somthing so that it starts working
                 eolLanguage:        "${grailsApplication.config.eol.lang}",
-                defaultDecimalLatitude: ${grailsApplication.config.defaultDecimalLatitude},
-                defaultDecimalLongitude: ${grailsApplication.config.defaultDecimalLongitude},
-                defaultZoomLevel: ${grailsApplication.config.defaultZoomLevel},
+                defaultDecimalLatitude: "${grailsApplication.config.defaultDecimalLatitude}",
+                defaultDecimalLongitude: "${grailsApplication.config.defaultDecimalLongitude}",
+                defaultZoomLevel: "${grailsApplication.config.defaultZoomLevel}",
                 mapAttribution: "${raw(grailsApplication.config.skin.orgNameLong)}",
                 defaultMapUrl: "${grailsApplication.config.map.default.url}",
                 defaultMapAttr: "${raw(grailsApplication.config.map.default.attr)}",
